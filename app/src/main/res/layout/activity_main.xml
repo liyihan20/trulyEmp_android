@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_scroll_view"
+    tools:context="cn.com.truly.ic.trulyemp.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        android:paddingBottom="12dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="132dp"
+            android:layout_marginTop="-2dp"
+            android:background="@drawable/index_bg"
+            >
+
+            <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+                android:id="@+id/main_portrait_thumbnail"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher"
+                app:hasBorder="false"/>
+
+            <TextView
+                android:id="@+id/main_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/main_portrait_thumbnail"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/colorWhite"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/icon_main_dorm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="@string/fa_bank"
+                android:textColor="@color/colorBootDanger"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/main_dorm_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/icon_main_dorm"
+                android:layout_toRightOf="@id/icon_main_dorm"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:text="@string/dorm_check"
+
+                />
+
+            <TextView
+                android:id="@+id/icon_main_right1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="@string/fa_angle_right"
+                android:textColor="@color/colorBootDanger"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/bootstrap_gray_lighter"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/icon_main_dinner_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="@string/fa_credit_card"
+                android:textColor="@color/colorBootDanger"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/main_dinner_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/icon_main_dinner_card"
+                android:layout_toRightOf="@id/icon_main_dinner_card"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:text="@string/dinner_card_check"
+                />
+
+            <TextView
+                android:id="@+id/icon_main_right2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="@string/fa_angle_right"
+                android:textColor="@color/colorBootDanger"/>
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_margin="12dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/main_news_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/paper"
+                    />
+
+                <TextView
+                    android:id="@+id/main_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/main_news_image"
+                    android:layout_toRightOf="@id/main_news_image"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="@string/news"
+                    />
+
+                <TextView
+                    android:id="@+id/main_first_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/main_news"
+                    android:layout_alignStart="@id/main_news"
+                    android:layout_below="@id/main_news"
+                    android:text="2017-09-01 安卓客户端正式启用"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/check_more"
+                    android:layout_below="@id/main_first_new"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:fabSize="mini"
+            app:rippleColor="@color/colorBootSuccess"
+            android:src="@drawable/ic_add"
+            />
+    </LinearLayout>
+
+
+</ScrollView>

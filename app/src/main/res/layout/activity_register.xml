@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="cn.com.truly.ic.trulyemp.RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <!--<LinearLayout-->
+            <!--style="?android:listSeparatorTextViewStyle"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/colorWhite"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="@dimen/activity_horizontal_margin">-->
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/register_title"
+                android:textSize="@dimen/activity_title_size"
+                android:background="@color/colorWhite"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:textStyle="italic"/>
+
+            <!--<View-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:background="@color/bootstrap_gray_lighter"/>-->
+        <!--</LinearLayout>-->
+
+        <LinearLayout
+            android:id="@+id/first_step_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:padding="@dimen/activity_horizontal_margin"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/reg_icon_card"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fa_credit_card"/>
+
+                <EditText
+                    android:id="@+id/reg_card_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_username"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/reg_icon_user"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fa_user"
+                    />
+
+                <EditText
+                    android:id="@+id/reg_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_name"
+                    android:singleLine="true"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/reg_icon_id_card"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fa_drivers_license_o"/>
+
+                <EditText
+                    android:id="@+id/reg_id_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="@string/prompt_id_number"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/reg_next_step_button"
+                style="@style/successButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/next_step"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/reg_second_step_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:padding="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:text="@string/prompt_second_register_tip"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/reg_icon_email"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fa_envelope"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/reg_email"
+                    android:inputType="none"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/reg_icon_email_code"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fa_ellipsis_h"/>
+
+                <EditText
+                    android:id="@+id/reg_email_code"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:singleLine="true"
+                    android:hint="@string/prompt_email_code"/>
+
+                <Button
+                    android:id="@+id/reg_send_code_button"
+                    style="@style/successButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:text="@string/send_email_code"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/reg_icon_phone"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fa_phone"/>
+
+                <EditText
+                    android:id="@+id/reg_phone"
+                    android:hint="@string/prompt_phone_last4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/reg_finish_button"
+                style="@style/successButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/finish_register"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

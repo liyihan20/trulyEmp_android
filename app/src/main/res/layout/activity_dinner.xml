@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.com.truly.ic.trulyemp.DinnerActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:padding="12dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/dinner_icon_list"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fa_th_list"
+                    android:textColor="@color/colorBootPrimary"
+                    android:textSize="20sp"
+                    />
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/current_dinner_info"
+                    android:textColor="@color/colorBootPrimary"
+                    android:textSize="20sp"
+                    android:textStyle="italic"
+                    />
+
+            </LinearLayout>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardElevation="4dp"
+                app:contentPadding="12dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/name"
+                            />
+
+                        <TextView
+                            android:id="@+id/dinner_user_name_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="40"
+                            android:textColor="@color/colorBootPrimary"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/card_number"
+                            />
+
+                        <TextView
+                            android:id="@+id/dinner_card_number_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="60"
+                            android:textColor="@color/colorBootPrimary"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/remain_sum"
+                            />
+
+                        <TextView
+                            android:id="@+id/dinner_remain_sum_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="40"
+                            android:textColor="@color/colorBootPrimary"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/status"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="60"
+                            >
+
+                            <TextView
+                                android:id="@+id/dinner_status_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorBootPrimary"
+                                />
+
+                            <TextView
+                                android:id="@+id/dinner_card_action_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="12dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:textColor="@color/colorBootDanger"
+                                />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/last_consume_time"
+                            />
+
+                        <TextView
+                            android:id="@+id/dinner_last_consume_time_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="100"
+                            android:textColor="@color/colorBootPrimary"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:padding="12dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/dinner_icon_binding"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fa_credit_card"
+                    android:textColor="@color/colorBootDanger"
+                    android:textSize="20sp"
+                    />
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/supermarket_binding"
+                    android:textColor="@color/colorBootDanger"
+                    android:textSize="20sp"
+                    android:textStyle="italic"
+                    />
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/is_open"
+                    />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/dinner_consume_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:textOff="@string/close"
+                    android:textOn="@string/open"/>
+
+                <TextView
+                    android:id="@+id/dinner_icon_info1"
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/dinner_consume_switch"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/fa_info_circle"
+                    android:textColor="@color/colorBootDanger"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dinner_consume_switch"
+                    android:layout_toEndOf="@id/dinner_icon_info1"
+                    android:layout_toRightOf="@id/dinner_icon_info1"
+                    android:text="@string/supermarket_open_tip"
+                    android:textColor="@color/colorBootDanger"
+                    android:textSize="12sp"
+                    />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/pay_password"
+                    />
+
+                <EditText
+                    android:id="@+id/dinner_pay_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="80"
+                    android:hint="@string/pay_password_prompt"
+                    android:inputType="numberPassword"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    />
+
+                <TextView
+                    android:id="@+id/dinner_icon_eye"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="20"
+                    android:clickable="true"
+                    android:gravity="end"
+                    android:text="@string/fa_eye_slash"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/consume_limit"
+                    />
+
+                <SeekBar
+                    android:id="@+id/dinner_limit_seek_bar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="80"/>
+
+                <TextView
+                    android:id="@+id/dinner_limit_value_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="20"
+                    android:gravity="end"
+                    android:text="@string/zero_yuan"
+                    android:textColor="@color/colorAccent"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/dinner_icon_info2"
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fa_info_circle"
+                    android:textColor="@color/colorBootDanger"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/consume_limit_tip"
+                    android:textColor="@color/colorBootDanger"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/dinner_save_binding_bt"
+                style="@style/dangerButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/save_configuration"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/dinner_icon_info3"
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fa_info_circle"
+                    android:textColor="@color/colorBootDanger"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dinner_binding_tip"
+                    android:textColor="@color/colorBootDanger"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:padding="12dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/dinner_icon_search"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fa_search"
+                    android:textColor="@color/colorBootSuccess"
+                    android:textSize="20sp"
+                    />
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/consume_charge_check"
+                    android:textColor="@color/colorBootSuccess"
+                    android:textSize="20sp"
+                    android:textStyle="italic"
+                    />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

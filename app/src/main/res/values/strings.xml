@@ -1,0 +1,96 @@
+<resources>
+    <string name="app_name">信利员工信息查询系统</string>
+    <string name="app_name_short">信利员工系统</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_username">请输入厂牌</string>
+    <string name="prompt_password">请输入密码</string>
+    <string name="password_validation">请先输入密码验证</string>
+    <string name="action_sign_in">登 陆</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_username">用户名不能为空</string>
+    <string name="error_invalid_password">密码不能少于6个字符</string>
+    <string name="error_incorrect_password">密码不正确</string>
+    <string name="remember_password">记住密码？</string>
+    <string name="register_tip">没有用户：点此进入注册</string>
+    <string name="doc_tip">操作指引：点此查看下载</string>
+    <string name="question_tip">登陆或操作如有问题可联系系统管理员：李逸焊（3006；liyihan.ic@truly.com.cn)</string>
+    <string name="forget_tip">用户被禁用或忘记密码：点击此处按提示操作</string>
+    <string name="title_activity_reset_password">重置密码</string>
+    <string name="set_new_password">设置新密码</string>
+    <string name="pls_new_password">请输入新密码</string>
+    <string name="pls_new_password_again">请再次输入新密码</string>
+    <string name="confirm_change">确认修改</string>
+    <string name="passwords_not_same">新密码和确认密码不一致</string>
+    <string name="complex_password_tip">说明:从2016-10-20号开始实行密码复杂化，密码至少为6位，且必须包含英文字母、数字。如:abc123</string>
+    <string name="register_title">用户注册</string>
+    <string name="prompt_id_number">请输入身份证号码后6位</string>
+    <string name="prompt_phone_last4">请输入手机号码后4位</string>
+    <string name="prompt_phone_number">请输入手机号码</string>
+    <string name="prompt_short_phone_number">请输入手机短号</string>
+    <string name="prompt_name">请输入姓名</string>
+    <string name="prompt_email_code">请输入验证码</string>
+    <string name="send_email_code">发送邮箱验证码</string>
+    <string name="next_step">下一步</string>
+    <string name="finish_register">完成注册</string>
+    <string name="prompt_second_register_tip">验证以下在人事系统中登记的邮箱或补全手机号码，其中一项通过即可</string>
+    <string name="reset_only">重置密码</string>
+    <string name="activate_only">用户解禁</string>
+    <string name="confirm">确认</string>
+    <string name="dorm_check">住宿状态及费用查询</string>
+    <string name="dinner_card_check">饭卡余额及消费查询</string>
+    <string name="check_more">查看更多 >></string>
+    <string name="news">公告栏</string>
+    <string name="hold_position">占位符</string>
+    <string name="prompt_email">邮箱地址</string>
+    <string name="prompt_short_phone">手机短号</string>
+    <string name="prompt_phone">手机长号</string>
+    <string name="prompt_new_password">新密码(不填即不修改密码)</string>
+    <string name="confirm_new_password">确认新密码</string>
+    <string name="current_living_status">当前住宿状态</string>
+    <string name="living_status">住宿状态:</string>
+    <string name="living_in_date">入住时间:</string>
+    <string name="dorm_area">宿舍区号:</string>
+    <string name="dorm_number">宿舍编号:</string>
+    <string name="monthly_dorm_fee_check">月度费用查询</string>
+    <string name="emp_dorm_info">员工住宿信息</string>
+    <string name="no_dorm_fee_tip">当前月份没有费用信息</string>
+    <string name="dorm_year_month">结算月份:</string>
+    <string name="dorm_rent">房租:</string>
+    <string name="dorm_management">管理费:</string>
+    <string name="dorm_ele">电费:</string>
+    <string name="dorm_water">水费:</string>
+    <string name="dorm_repair">维修费:</string>
+    <string name="dorm_fine">扣分:</string>
+    <string name="dorm_other_fee">其它费用:</string>
+    <string name="dorm_comment">备注:</string>
+    <string name="dorm_total">本月合计:</string>
+
+    <string name="dinner_info">员工饭卡信息</string>
+    <string name="current_dinner_info">当前饭卡信息</string>
+    <string name="name">姓名:</string>
+    <string name="card_number">厂牌:</string>
+    <string name="remain_sum">余额:</string>
+    <string name="status">状态:</string>
+    <string name="last_consume_time">最后消费时间:</string>
+    <string name="supermarket_binding">信利超市饭卡消费绑定</string>
+    <string name="is_open">是否启用:</string>
+    <string name="close">关闭</string>
+    <string name="open">开启</string>
+    <string name="supermarket_open_tip">开启表示开通刷卡消费，关闭表示禁用刷卡消费</string>
+    <string name="pay_password">支付密码:</string>
+    <string name="pay_password_prompt">请输入6位数字密码</string>
+    <string name="consume_limit">消费限额:</string>
+    <string name="zero_yuan">0 元</string>
+    <string name="consume_limit_tip">例如：免密限额设置为50元，则50元以下消费不需要输入支付密码，50元以上消费则需要输入支付密码</string>
+    <string name="save_configuration">保存设定</string>
+    <string name="dinner_binding_tip">以上设定只对信利城市广场和蓝天广场等消费时生效，对食堂和社区超市消费没有影响</string>
+    <string name="consume_charge_check">消费&amp;充值记录查询</string>
+
+
+
+
+
+
+
+</resources>
