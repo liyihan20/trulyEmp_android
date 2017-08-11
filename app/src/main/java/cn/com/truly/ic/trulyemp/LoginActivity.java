@@ -230,6 +230,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         mRememberMe.requestFocus();
+        Log.d("versioncode",getVersionCode()+"");
     }
 
 
@@ -413,6 +414,15 @@ public class LoginActivity extends AppCompatActivity {
 
     public String getImei() {
         return ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId();
+    }
+
+    private int getVersionCode(){
+        try {
+            return getPackageManager().getPackageInfo("cn.com.truly.ic.trulyemp", PackageManager.GET_CONFIGURATIONS).versionCode;
+        }catch (PackageManager.NameNotFoundException ex){
+            ex.printStackTrace();
+        }
+        return -1;
     }
 }
 

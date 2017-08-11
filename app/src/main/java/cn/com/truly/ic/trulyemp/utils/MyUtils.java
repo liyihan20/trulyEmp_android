@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.icu.util.DateInterval;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Base64;
@@ -31,7 +32,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -127,10 +130,21 @@ public class MyUtils {
      * @return yyyy-MM-dd HH:mm:ss 的当前时间
      */
     public static String getDateTime(Date dt) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.CHINA);
         return df.format(dt);
     }
 
+    public static String getDateStr(Date dt){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
+        return df.format(dt);
+    }
+
+    public static Date addDays(Date dt,int days){
+        Calendar calendar=new GregorianCalendar();
+        calendar.setTime(dt);
+        calendar.add(Calendar.DATE,days);
+        return calendar.getTime();
+    }
 
     /**
      * 检查手机是否有网络连接

@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 
+import java.lang.ref.WeakReference;
+
 import cn.com.truly.ic.trulyemp.models.DormInfoModel;
 import cn.com.truly.ic.trulyemp.models.ParamsModel;
 import cn.com.truly.ic.trulyemp.models.SimpleResultModel;
@@ -32,33 +34,44 @@ public class DormActivity extends BaseActivity {
 
         initView();
 
-        mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                SimpleResultModel result = JSON.parseObject(msg.obj.toString(), SimpleResultModel.class);
-                switch (msg.what) {
-                    case 1:
-                        DormInfoModel info = JSON.parseObject(result.getExtra(), DormInfoModel.class);
-                        mDormStatusTv.setText(info.getLivingStatus());
-                        mInDateTv.setText(info.getInDate());
-                        mAreaNameTv.setText(info.getAreaName());
-                        mDormNumberTv.setText(info.getDormNumber());
-
-                        PagerAdapter pagerAdapter = new PagerAdapter(
-                                getSupportFragmentManager(),
-                                info.getFeeMonths().split(","),
-                                userModel.getSalaryNumber()
-                        );
-                        mViewPager.setAdapter(pagerAdapter);
-                        mTabLayout.setupWithViewPager(mViewPager);
-
-                        break;
-                }
-                super.handleMessage(msg);
-            }
-        };
+        mHandler = new MyHandler(this);
 
         new GetDormLivingStatusThread().start();
+    }
+
+    private static class MyHandler extends Handler {
+        private final WeakReference<DormActivity> mDormActivityWeakReference;
+
+        private MyHandler(DormActivity activity) {
+            mDormActivityWeakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            DormActivity target = mDormActivityWeakReference.get();
+            if (target == null) return;
+            SimpleResultModel result = JSON.parseObject(msg.obj.toString(), SimpleResultModel.class);
+            switch (msg.what) {
+                case 1:
+                    DormInfoModel info = JSON.parseObject(result.getExtra(), DormInfoModel.class);
+                    target.mDormStatusTv.setText(info.getLivingStatus());
+                    target.mInDateTv.setText(info.getInDate());
+                    target.mAreaNameTv.setText(info.getAreaName());
+                    target.mDormNumberTv.setText(info.getDormNumber());
+
+                    PagerAdapter pagerAdapter = new PagerAdapter(
+                            target.getSupportFragmentManager(),
+                            info.getFeeMonths().split(","),
+                            target.userModel.getSalaryNumber()
+                    );
+                    target.mViewPager.setAdapter(pagerAdapter);
+                    target.mTabLayout.setupWithViewPager(target.mViewPager);
+
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+
     }
 
     private void initView() {
@@ -90,12 +103,12 @@ public class DormActivity extends BaseActivity {
         }
     }
 
-    private class PagerAdapter extends FragmentPagerAdapter {
+    private static class PagerAdapter extends FragmentPagerAdapter {
 
         private String mSalaryNumber;
         private String[] mTitles;
 
-        public PagerAdapter(FragmentManager fm, String[] titles, String salaryNumber) {
+        private PagerAdapter(FragmentManager fm, String[] titles, String salaryNumber) {
             super(fm);
             this.mTitles = titles;
             this.mSalaryNumber = salaryNumber;

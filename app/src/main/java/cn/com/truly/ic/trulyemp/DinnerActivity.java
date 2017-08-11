@@ -13,12 +13,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+
+import java.lang.ref.WeakReference;
 
 import cn.com.truly.ic.trulyemp.models.DinnerBindingModel;
 import cn.com.truly.ic.trulyemp.models.DinnerInfoModels;
@@ -52,46 +54,56 @@ public class DinnerActivity extends BaseActivity {
 
         initView();
 
-        mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                SimpleResultModel result = JSON.parseObject(msg.obj.toString(), SimpleResultModel.class);
-                switch (msg.what) {
-                    case 1:
-                        DinnerInfoModels info = JSON.parseObject(result.getExtra(), DinnerInfoModels.class);
-                        mUserName.setText(userModel.getUserName());
-                        mCardNumber.setText(userModel.getCardNumber());
-                        mDCardStatus.setText(info.getCardStatus());
-                        mRemainSum.setText(info.getSumRemain());
-                        mLastConsumeTime.setText(info.getLastConsumeTime());
-                        updateCardAction();
-                        break;
-                    case 2:
-                        mDCardStatus.setText(result.getExtra());
-                        updateCardAction();
-                        Toast.makeText(DinnerActivity.this, result.getMsg(), Toast.LENGTH_LONG).show();
-                        break;
-                    case 3:
-                        if (result.isSuc()) {
-                            DinnerBindingModel binding = JSON.parseObject(result.getExtra(), DinnerBindingModel.class);
-                            mSwitchCompat.setChecked("1".equals(binding.getStatus()));
-                            mPayPassword.setText(binding.getPayPassword());
-                            mSeekBar.setProgress(Integer.parseInt(binding.getLimit()));
-                        }
-                        setBindingEnable();
-                        break;
-                    case 4:
-                        Toast.makeText(DinnerActivity.this,result.getMsg(),Toast.LENGTH_LONG).show();
-                        mSaveButton.setEnabled(true);
-                        break;
-                }
-
-                super.handleMessage(msg);
-            }
-        };
+        mHandler = new MyHandler(this);
 
         new GetDormInfoThread().start();
         new GetBindingInfoThread().start();
+    }
+
+    private static class MyHandler extends Handler {
+        private final WeakReference<DinnerActivity> mActivity;
+
+        private MyHandler(DinnerActivity activity) {
+            mActivity = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            DinnerActivity target = mActivity.get();
+            if (target == null) return;
+            SimpleResultModel result = JSON.parseObject(msg.obj.toString(), SimpleResultModel.class);
+            switch (msg.what) {
+                case 1:
+                    DinnerInfoModels info = JSON.parseObject(result.getExtra(), DinnerInfoModels.class);
+                    target.mUserName.setText(target.userModel.getUserName());
+                    target.mCardNumber.setText(target.userModel.getCardNumber());
+                    target.mDCardStatus.setText(info.getCardStatus());
+                    target.mRemainSum.setText(info.getSumRemain());
+                    target.mLastConsumeTime.setText(info.getLastConsumeTime());
+                    target.updateCardAction();
+                    break;
+                case 2:
+                    target.mDCardStatus.setText(result.getExtra());
+                    target.updateCardAction();
+                    Toast.makeText(target, result.getMsg(), Toast.LENGTH_LONG).show();
+                    break;
+                case 3:
+                    if (result.isSuc()) {
+                        DinnerBindingModel binding = JSON.parseObject(result.getExtra(), DinnerBindingModel.class);
+                        target.mSwitchCompat.setChecked("1".equals(binding.getStatus()));
+                        target.mPayPassword.setText(binding.getPayPassword());
+                        target.mSeekBar.setProgress(Integer.parseInt(binding.getLimit()));
+                    }
+                    mActivity.get().setBindingEnable();
+                    break;
+                case 4:
+                    Toast.makeText(target, result.getMsg(), Toast.LENGTH_LONG).show();
+                    target.mSaveButton.setEnabled(true);
+                    break;
+            }
+
+            super.handleMessage(msg);
+        }
     }
 
     private void initView() {
@@ -107,6 +119,9 @@ public class DinnerActivity extends BaseActivity {
         mPayPassword = (EditText) findViewById(R.id.dinner_pay_password);
         mLimitValue = (TextView) findViewById(R.id.dinner_limit_value_tv);
 
+        RelativeLayout consumeRecordLt = (RelativeLayout) findViewById(R.id.dinner_consume_record_layout);
+        RelativeLayout chargeRecordLt = (RelativeLayout) findViewById(R.id.dinner_charge_record_layout);
+
         mIconEye = (TextView) findViewById(R.id.dinner_icon_eye);
         TextView iconInfo1 = (TextView) findViewById(R.id.dinner_icon_info1);
         TextView iconInfo2 = (TextView) findViewById(R.id.dinner_icon_info2);
@@ -114,11 +129,18 @@ public class DinnerActivity extends BaseActivity {
         TextView iconList = (TextView) findViewById(R.id.dinner_icon_list);
         TextView iconBinding = (TextView) findViewById(R.id.dinner_icon_binding);
         TextView iconSearch = (TextView) findViewById(R.id.dinner_icon_search);
+        TextView iconMinus = (TextView) findViewById(R.id.dinner_icon_minus);
+        TextView iconRight1 = (TextView) findViewById(R.id.dinner_icon_right1);
+        TextView iconPlus = (TextView) findViewById(R.id.dinner_icon_plus);
+        TextView iconRight2 = (TextView) findViewById(R.id.dinner_icon_right2);
+        TextView iconInfo4 = (TextView) findViewById(R.id.dinner_icon_info4);
+        TextView iconInfo5 = (TextView) findViewById(R.id.dinner_icon_info5);
 
         mSaveButton = (Button) findViewById(R.id.dinner_save_binding_bt);
 
         MyUtils.setFont(this, MyUtils.createArrayList(mIconEye, iconInfo1, iconInfo2,
-                iconInfo3, iconList, iconBinding, iconSearch));
+                iconInfo3, iconList, iconBinding, iconSearch, iconMinus, iconRight1,
+                iconPlus, iconRight2, iconInfo4, iconInfo5));
 
         mIconEye.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +187,7 @@ public class DinnerActivity extends BaseActivity {
                 new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        mLimitValue.setText(progress + " 元");
+                        mLimitValue.setText(String.format(getString(R.string.many_yuan), progress));
                     }
 
                     @Override
@@ -201,6 +223,24 @@ public class DinnerActivity extends BaseActivity {
                 }
                 mSaveButton.setEnabled(false);
                 new SaveBindingInfoThread().start();
+            }
+        });
+
+        consumeRecordLt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SearchByDateActivity.newIntent(DinnerActivity.this,
+                        getString(R.string.consume_record_check), SearchByDateFragment.Which.CONSUME_RECORD);
+                startActivity(intent);
+            }
+        });
+
+        chargeRecordLt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SearchByDateActivity.newIntent(DinnerActivity.this,
+                        getString(R.string.recharge_record_check), SearchByDateFragment.Which.RECHARGE_RECORD);
+                startActivity(intent);
             }
         });
 

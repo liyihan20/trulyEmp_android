@@ -38,7 +38,9 @@
     <string name="activate_only">用户解禁</string>
     <string name="confirm">确认</string>
     <string name="dorm_check">住宿状态及费用查询</string>
+    <string name="dorm_check_tip">可以查询本人最近半年内的房租、水电费、扣费等记录</string>
     <string name="dinner_card_check">饭卡余额及消费查询</string>
+    <string name="dinner_card_check_tip">可以查询本人的饭卡余额和最近的充值、消费历史记录</string>
     <string name="check_more">查看更多 >></string>
     <string name="news">公告栏</string>
     <string name="hold_position">占位符</string>
@@ -82,15 +84,29 @@
     <string name="pay_password_prompt">请输入6位数字密码</string>
     <string name="consume_limit">消费限额:</string>
     <string name="zero_yuan">0 元</string>
+    <string name="many_yuan">%1$d 元</string>
     <string name="consume_limit_tip">例如：免密限额设置为50元，则50元以下消费不需要输入支付密码，50元以上消费则需要输入支付密码</string>
     <string name="save_configuration">保存设定</string>
     <string name="dinner_binding_tip">以上设定只对信利城市广场和蓝天广场等消费时生效，对食堂和社区超市消费没有影响</string>
     <string name="consume_charge_check">消费&amp;充值记录查询</string>
 
+    <string name="consume_record_check">查询消费记录</string>
+    <string name="consume_record_check_tip">可以查询到最近30天的消费记录</string>
+    <string name="recharge_record_check">查询充值记录</string>
+    <string name="recharge_record_check_tip">可以查询到最近180天的充值记录</string>
+    <string name="from_date">起始日期:</string>
+    <string name="to_date">结束日期:</string>
+    <string name="begin_search">开始搜索</string>
 
+    <string name="time">时间:</string>
+    <string name="sum">金额:</string>
+    <string name="dinner_type">餐别:</string>
+    <string name="place">地点:</string>
+    <string name="recharge_sum">充值金额:</string>
+    <string name="sum_differ">金额变动:</string>
+    <string name="differ_icon">-></string>
+    <string name="recharge_place">充值地点:</string>
+    <string name="recharge_time">充值时间:</string>
 
-
-
-
-
+    <string name="checking">查询中……</string>
 </resources>

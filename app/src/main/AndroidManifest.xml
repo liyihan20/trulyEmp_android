@@ -89,6 +89,7 @@
             android:parentActivityName=".MainActivity"
             >
         </activity>
+        <activity android:name=".SearchByDateActivity"></activity>
     </application>
 
 </manifest>

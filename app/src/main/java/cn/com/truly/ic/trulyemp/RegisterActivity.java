@@ -306,7 +306,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private class CountDowntime extends CountDownTimer {
 
-        public CountDowntime(long millisInFuture, long countDownInterval) {
+        private CountDowntime(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
 

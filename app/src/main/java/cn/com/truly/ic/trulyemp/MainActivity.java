@@ -9,6 +9,7 @@ import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +28,7 @@ public class MainActivity extends BaseActivity {
 
     private BootstrapCircleThumbnail mPortraitThumbnail;
     private ScrollView mScrollView;
-    private final String UPDATE_INFO_DIALOG = "update_info_dialog";
+    private static final String UPDATE_INFO_DIALOG = "update_info_dialog";
 
     private Handler mHandler;
     private long mClickedTime = 0;
@@ -72,11 +73,11 @@ public class MainActivity extends BaseActivity {
         mScrollView = (ScrollView) findViewById(R.id.main_scroll_view);
         mPortraitThumbnail = (BootstrapCircleThumbnail) findViewById(R.id.main_portrait_thumbnail);
 
+        RelativeLayout dormLayout=(RelativeLayout)findViewById(R.id.main_dorm_layout);
+        RelativeLayout dinnerLayout=(RelativeLayout)findViewById(R.id.main_dinner_layout);
         TextView userNameTextView = (TextView) findViewById(R.id.main_user_name);
-        TextView dormTv = (TextView) findViewById(R.id.main_dorm_tv);
         TextView iconDorm = (TextView) findViewById(R.id.icon_main_dorm);
         TextView iconRight1 = (TextView) findViewById(R.id.icon_main_right1);
-        TextView dinnerTv = (TextView) findViewById(R.id.main_dinner_tv);
         TextView iconDinnerCard = (TextView) findViewById(R.id.icon_main_dinner_card);
         TextView iconRight2 = (TextView) findViewById(R.id.icon_main_right2);
 
@@ -90,14 +91,14 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        dormTv.setOnClickListener(new View.OnClickListener() {
+        dormLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new UserIsInDormThread().start();
             }
         });
 
-        dinnerTv.setOnClickListener(new View.OnClickListener() {
+        dinnerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(DinnerActivity.newIntent(MainActivity.this));
@@ -131,7 +132,7 @@ public class MainActivity extends BaseActivity {
         } else if (TextUtils.isEmpty(email)) {
             msg = "检测到你的邮箱地址未设置，不限信利邮箱，可以是QQ或163等邮箱，请更新个人信息";
         } else if (TextUtils.isEmpty(phone)) {
-            msg = "检测到你的手机号码为设置，请更新个人信息";
+            msg = "检测到你的手机号码未设置，请更新个人信息";
         }
 
         Snackbar.make(mScrollView, msg, BaseTransientBottomBar.LENGTH_INDEFINITE)

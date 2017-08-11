@@ -50,6 +50,7 @@
             android:layout_marginTop="12dp"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
+            android:id="@+id/main_dorm_layout"
             android:padding="16dp">
 
             <TextView
@@ -60,7 +61,8 @@
                 android:layout_alignParentStart="true"
                 android:text="@string/fa_bank"
                 android:textColor="@color/colorBootDanger"
-                android:textSize="18sp"/>
+                android:layout_centerVertical="true"
+                android:textSize="24sp"/>
 
             <TextView
                 android:id="@+id/main_dorm_tv"
@@ -68,10 +70,21 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/icon_main_dorm"
                 android:layout_toRightOf="@id/icon_main_dorm"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/dorm_check"
+                android:textSize="18sp"
+                />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/main_dorm_tv"
+                android:layout_alignLeft="@id/main_dorm_tv"
+                android:layout_alignStart="@id/main_dorm_tv"
+                android:textSize="12sp"
+                android:textColor="@color/bootstrap_gray_light"
+                android:text="@string/dorm_check_tip"
                 />
 
             <TextView
@@ -80,6 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textSize="18sp"
                 android:text="@string/fa_angle_right"
                 android:textColor="@color/colorBootDanger"/>
 
@@ -95,6 +110,7 @@
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
+            android:id="@+id/main_dinner_layout"
             android:padding="16dp">
 
             <TextView
@@ -103,9 +119,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:text="@string/fa_credit_card"
                 android:textColor="@color/colorBootDanger"
-                android:textSize="18sp"/>
+                android:textSize="24sp"/>
 
             <TextView
                 android:id="@+id/main_dinner_tv"
@@ -113,90 +130,35 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/icon_main_dinner_card"
                 android:layout_toRightOf="@id/icon_main_dinner_card"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/dinner_card_check"
+                android:textSize="18sp"
                 />
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/main_dinner_tv"
+                android:layout_alignLeft="@id/main_dinner_tv"
+                android:layout_alignStart="@id/main_dinner_tv"
+                android:textSize="12sp"
+                android:textColor="@color/bootstrap_gray_light"
+                android:text="@string/dinner_card_check_tip"
+                />
             <TextView
                 android:id="@+id/icon_main_right2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textSize="18sp"
                 android:text="@string/fa_angle_right"
                 android:textColor="@color/colorBootDanger"/>
 
         </RelativeLayout>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardElevation="4dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_margin="12dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp">
-
-                <ImageView
-                    android:id="@+id/main_news_image"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:src="@drawable/paper"
-                    />
-
-                <TextView
-                    android:id="@+id/main_news"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/main_news_image"
-                    android:layout_toRightOf="@id/main_news_image"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:text="@string/news"
-                    />
-
-                <TextView
-                    android:id="@+id/main_first_new"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/main_news"
-                    android:layout_alignStart="@id/main_news"
-                    android:layout_below="@id/main_news"
-                    android:text="2017-09-01 安卓客户端正式启用"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/check_more"
-                    android:layout_below="@id/main_first_new"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    />
-
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            app:fabSize="mini"
-            app:rippleColor="@color/colorBootSuccess"
-            android:src="@drawable/ic_add"
-            />
     </LinearLayout>
 
 
