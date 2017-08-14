@@ -1,10 +1,12 @@
 package cn.com.truly.ic.trulyemp.models;
 
+import java.io.Serializable;
+
 /**
  * Created by 110428101 on 2017-07-05.
  */
 
-public class UserModel {
+public class UserModel implements Serializable {
     private int userId;
     private String userName;
     private String cardNumber;
@@ -95,4 +97,6 @@ public class UserModel {
     public void setMd5Password(String md5Password) {
         this.md5Password = md5Password;
     }
+
+
 }

@@ -12,11 +12,14 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 
+import org.w3c.dom.Text;
+
 import java.lang.ref.WeakReference;
 
 import cn.com.truly.ic.trulyemp.models.DormInfoModel;
 import cn.com.truly.ic.trulyemp.models.ParamsModel;
 import cn.com.truly.ic.trulyemp.models.SimpleResultModel;
+import cn.com.truly.ic.trulyemp.utils.MyUtils;
 import cn.com.truly.ic.trulyemp.utils.SoapService;
 
 public class DormActivity extends BaseActivity {
@@ -82,6 +85,11 @@ public class DormActivity extends BaseActivity {
 
         mTabLayout = (TabLayout) findViewById(R.id.dorm_fee_tab);
         mViewPager = (ViewPager) findViewById(R.id.dorm_fee_pager);
+
+        TextView iconHome=(TextView)findViewById(R.id.dorm_icon_living_status);
+        TextView iconFee=(TextView)findViewById(R.id.dorm_icon_fee);
+
+        MyUtils.setFont(this,MyUtils.createArrayList(iconHome,iconFee));
     }
 
     private class GetDormLivingStatusThread extends Thread {

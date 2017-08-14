@@ -23,7 +23,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="12dp"
             android:layout_marginEnd="12dp"
-            android:src="@drawable/minus"
+            android:src="@drawable/food"
             android:contentDescription="@string/app_name"
             />
         <TextView

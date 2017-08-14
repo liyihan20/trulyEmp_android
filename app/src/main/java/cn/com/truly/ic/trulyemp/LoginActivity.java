@@ -37,13 +37,17 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import cn.com.truly.ic.trulyemp.app.TrulyEmpApp;
 import cn.com.truly.ic.trulyemp.models.ParamsModel;
 import cn.com.truly.ic.trulyemp.models.SimpleResultModel;
+import cn.com.truly.ic.trulyemp.models.UpdateModel;
 import cn.com.truly.ic.trulyemp.models.UserModel;
 import cn.com.truly.ic.trulyemp.utils.MyUtils;
 import cn.com.truly.ic.trulyemp.utils.SoapService;
@@ -89,11 +93,9 @@ public class LoginActivity extends AppCompatActivity {
         mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                SimpleResultModel result;
+                final SimpleResultModel result= JSON.parseObject(msg.obj.toString(), SimpleResultModel.class);
                 switch (msg.what) {
                     case 1:
-                        showProgress(false);
-                        result = JSON.parseObject(msg.obj.toString(), SimpleResultModel.class);
                         if (result.isSuc()) {
                             if ("CHANGE_PASSWORD".equals(result.getMsg())) {
                                 //需重置密码
@@ -110,7 +112,6 @@ public class LoginActivity extends AppCompatActivity {
                         break;
                     case 2:
                         showProgress(false);
-                        result = JSON.parseObject(msg.obj.toString(), SimpleResultModel.class);
                         if (result.isSuc()) {
                             UserEmailAndIdModel ueModel = JSON.parseObject(result.getExtra(), UserEmailAndIdModel.class);
                             FragmentManager fm = getSupportFragmentManager();
@@ -122,6 +123,38 @@ public class LoginActivity extends AppCompatActivity {
                             dialog.show(fm, DIALOG_ACTIVATE_USER);
                         } else {
                             Toast.makeText(LoginActivity.this, result.getMsg(), Toast.LENGTH_LONG).show();
+                        }
+                        break;
+                    case 3:
+                        showProgress(false); //登陆操作的进度条在这里才取消
+                        final UpdateModel uModel= JSON.parseObject(result.getExtra(),UpdateModel.class);
+                        if(uModel.getVersionCode()>getVersionCode()){
+                            MyUtils.showAlertDialog(LoginActivity.this,
+                                    "版本升级"
+                                    , "检测到有新的版本" + (uModel.isForceUpdate() ? "(重大更新，必须升级)" : "") + ",是否前往下载安装?"
+                                    , null,
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                                            intent.setData(Uri.parse(uModel.getApkUrl()));
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if(uModel.isForceUpdate()){
+                                                finish();
+                                            }else{
+                                                Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                                startActivity(mainIntent);
+                                            }
+                                        }
+                                    });
+                        }else {
+                            Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(mainIntent);
                         }
                         break;
                 }
@@ -230,7 +263,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         mRememberMe.requestFocus();
-        Log.d("versioncode",getVersionCode()+"");
     }
 
 
@@ -266,6 +298,24 @@ public class LoginActivity extends AppCompatActivity {
                 Message msg = mHandler.obtainMessage();
                 msg.what = 2;
                 msg.obj = soap.getSoapStringResult("UserHasEmail", pm);
+                mHandler.sendMessage(msg);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    private class CheckUpdateThread extends Thread {
+        @Override
+        public void run() {
+            SoapService soap = new SoapService();
+            ParamsModel pm = new ParamsModel();
+            pm.setArg1(mUserName.getText().toString());
+            pm.setArg2(mImei);
+            try {
+                Message msg = mHandler.obtainMessage();
+                msg.what = 3;
+                msg.obj = soap.getSoapStringResult("GetVersionCode", pm);
                 mHandler.sendMessage(msg);
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -336,8 +386,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Intent mainIntent=new Intent(this,MainActivity.class);
-        startActivity(mainIntent);
+        HashSet<String> tags=new HashSet<>();
+        tags.add("V"+getVersionCode());
+        JPushInterface.setTags(this,0,tags);
+
+        //检查版本更新
+        new CheckUpdateThread().start();
 
     }
 
