@@ -272,7 +272,7 @@ public class DinnerActivity extends BaseActivity {
     private class GetDormInfoThread extends Thread {
         @Override
         public void run() {
-            SoapService soap = new SoapService();
+            SoapService soap = new SoapService(userModel.getUserId());
             ParamsModel pm = new ParamsModel();
             pm.setArg1(userModel.getCardNumber());
 
@@ -293,7 +293,7 @@ public class DinnerActivity extends BaseActivity {
     private class LockAndUnlock extends Thread {
         @Override
         public void run() {
-            SoapService soap = new SoapService();
+            SoapService soap = new SoapService(userModel.getUserId());
             ParamsModel pm = new ParamsModel();
             pm.setArg1(userModel.getCardNumber());
             pm.setArg2(mActionCode);
@@ -314,7 +314,7 @@ public class DinnerActivity extends BaseActivity {
     private class GetBindingInfoThread extends Thread {
         @Override
         public void run() {
-            SoapService soap = new SoapService();
+            SoapService soap = new SoapService(userModel.getUserId());
             ParamsModel pm = new ParamsModel();
             pm.setArg1(userModel.getCardNumber());
 
@@ -334,7 +334,7 @@ public class DinnerActivity extends BaseActivity {
     private class SaveBindingInfoThread extends Thread {
         @Override
         public void run() {
-            SoapService soap = new SoapService();
+            SoapService soap = new SoapService(userModel.getUserId());
             ParamsModel pm = new ParamsModel();
             pm.setArg1(userModel.getCardNumber());
             pm.setArg2(mSwitchCompat.isChecked() ? "1" : "0");

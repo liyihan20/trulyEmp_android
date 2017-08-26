@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         if (!MyUtils.isConnectingToInternet(getApplicationContext())) {
-            MyUtils.showAlertDialog(this, "网络连接检查", "无法连接到网络，请检查系统设置", false,null,null);
+            MyUtils.showAlertDialog(this, "网络连接检查", "无法连接到网络，请检查系统设置", false, null, null);
             return;
         }
 
@@ -93,12 +93,13 @@ public class LoginActivity extends AppCompatActivity {
         mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                final SimpleResultModel result= JSON.parseObject(msg.obj.toString(), SimpleResultModel.class);
+                final SimpleResultModel result = JSON.parseObject(msg.obj.toString(), SimpleResultModel.class);
                 switch (msg.what) {
                     case 1:
                         if (result.isSuc()) {
                             if ("CHANGE_PASSWORD".equals(result.getMsg())) {
                                 //需重置密码
+                                showProgress(false);
                                 Intent intent = ResetPasswordActivity.newIntent(LoginActivity.this,
                                         mUserName.getText().toString());
                                 startActivityForResult(intent, REQUEST_CODE_RESET);
@@ -107,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                                 loginSuccess(JSON.parseObject(result.getExtra(), UserModel.class));
                             }
                         } else {
+                            showProgress(false);
                             Toast.makeText(LoginActivity.this, result.getMsg(), Toast.LENGTH_LONG).show();
                         }
                         break;
@@ -127,8 +129,8 @@ public class LoginActivity extends AppCompatActivity {
                         break;
                     case 3:
                         showProgress(false); //登陆操作的进度条在这里才取消
-                        final UpdateModel uModel= JSON.parseObject(result.getExtra(),UpdateModel.class);
-                        if(uModel.getVersionCode()>getVersionCode()){
+                        final UpdateModel uModel = JSON.parseObject(result.getExtra(), UpdateModel.class);
+                        if (uModel.getVersionCode() > getVersionCode()) {
                             MyUtils.showAlertDialog(LoginActivity.this,
                                     "版本升级"
                                     , "检测到有新的版本" + (uModel.isForceUpdate() ? "(重大更新，必须升级)" : "") + ",是否前往下载安装?"
@@ -144,15 +146,15 @@ public class LoginActivity extends AppCompatActivity {
                                     }, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            if(uModel.isForceUpdate()){
+                                            if (uModel.isForceUpdate()) {
                                                 finish();
-                                            }else{
+                                            } else {
                                                 Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                                                 startActivity(mainIntent);
                                             }
                                         }
                                     });
-                        }else {
+                        } else {
                             Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(mainIntent);
                         }
@@ -182,7 +184,7 @@ public class LoginActivity extends AppCompatActivity {
         TextView registerLink = (TextView) findViewById(R.id.register_link);
         TextView forgetLink = (TextView) findViewById(R.id.forget_link);
         TextView docLink = (TextView) findViewById(R.id.doc_link);
-        TextView questionLink=(TextView) findViewById(R.id.question_link);
+        TextView questionLink = (TextView) findViewById(R.id.question_link);
         TextView faQuestion = (TextView) findViewById(R.id.icon_question);
         TextView faQuestion2 = (TextView) findViewById(R.id.icon_question2);
         TextView faQuestion3 = (TextView) findViewById(R.id.icon_question3);
@@ -254,17 +256,16 @@ public class LoginActivity extends AppCompatActivity {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 //i.setType("text/plain"); //use this line for testing in the emulator
-                i.setType("message/rfc822") ; // use from live device
+                i.setType("message/rfc822"); // use from live device
                 i.putExtra(Intent.EXTRA_EMAIL, new String[]{"liyihan.ic@truly.com.cn"});
-                i.putExtra(Intent.EXTRA_SUBJECT,"信利员工信息查询系统(android)");
-                i.putExtra(Intent.EXTRA_TEXT,"系统管理员,你好：");
+                i.putExtra(Intent.EXTRA_SUBJECT, "信利员工信息查询系统(android)");
+                i.putExtra(Intent.EXTRA_TEXT, "系统管理员,你好：");
                 startActivity(Intent.createChooser(i, "请选择发送邮件的程序"));
             }
         });
 
         mRememberMe.requestFocus();
     }
-
 
 
     private class LoginThread extends Thread {
@@ -376,7 +377,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         editor.apply();
 
-        final TrulyEmpApp app = (TrulyEmpApp)getApplication();
+        final TrulyEmpApp app = (TrulyEmpApp) getApplication();
         app.setUserModel(user);
 
         JPushInterface.setAlias(this, user.getCardNumber(), new TagAliasCallback() {
@@ -386,9 +387,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        HashSet<String> tags=new HashSet<>();
-        tags.add("V"+getVersionCode());
-        JPushInterface.setTags(this,0,tags);
+        HashSet<String> tags = new HashSet<>();
+        tags.add("V" + getVersionCode());
+        JPushInterface.setTags(this, 0, tags);
 
         //检查版本更新
         new CheckUpdateThread().start();
@@ -470,10 +471,10 @@ public class LoginActivity extends AppCompatActivity {
         return ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId();
     }
 
-    private int getVersionCode(){
+    private int getVersionCode() {
         try {
             return getPackageManager().getPackageInfo("cn.com.truly.ic.trulyemp", PackageManager.GET_CONFIGURATIONS).versionCode;
-        }catch (PackageManager.NameNotFoundException ex){
+        } catch (PackageManager.NameNotFoundException ex) {
             ex.printStackTrace();
         }
         return -1;

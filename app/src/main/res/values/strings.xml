@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">信利员工信息查询系统</string>
+    <string name="app_name">信利e家</string>
     <string name="app_name_short">信利员工系统</string>
 
     <!-- Strings related to login -->
@@ -109,4 +109,25 @@
     <string name="recharge_time">充值时间:</string>
 
     <string name="checking">查询中……</string>
+    <string name="admin_interface">管理员界面</string>
+    <string name="admin_interface_tip">用户管理等入口</string>
+    <string name="user_management">用户管理</string>
+    <string name="search">搜索</string>
+    <string name="dealing">处理中</string>
+
+    <string name="reset_password">重置密码</string>
+    <string name="activate_user">禁用/激活</string>
+
+    <string name="check_salary">工资明细查询</string>
+    <string name="check_salary_tip">可以查询本人的工资概况和最近半年内的发放明细记录</string>
+
+    <string name="salary_info">当前工资概览</string>
+    <string name="salary_detail_check">工资明细查询</string>
+    <string name="salary_no">账号:</string>
+    <string name="basic_salary">基本工资:</string>
+    <string name="salary_type">类别:</string>
+    <string name="last_salary_month">最近发放:</string>
+
+    <string name="check_more_detail">查询更多明细</string>
+
 </resources>

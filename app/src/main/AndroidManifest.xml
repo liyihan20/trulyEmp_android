@@ -87,10 +87,24 @@
         <activity
             android:name=".DinnerActivity"
             android:label="@string/dinner_info"
-            android:parentActivityName=".MainActivity"
-            >
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".SearchByDateActivity"/>
+        <activity
+            android:name=".AdminActivity"
+            android:label="@string/admin_interface"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".UsersActivity"
+            android:label="@string/user_management"
+            android:parentActivityName=".AdminActivity">
         </activity>
-        <activity android:name=".SearchByDateActivity"></activity>
+        <activity
+            android:name=".UserDetailActivity"
+            android:label="用户明细信息"
+            android:parentActivityName=".UsersActivity">
+        </activity>
+        <activity android:name=".SalaryActivity">
+        </activity>
     </application>
 
 </manifest>

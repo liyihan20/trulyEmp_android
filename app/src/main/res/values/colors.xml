@@ -12,4 +12,5 @@
     <color name="colorBootDanger">#d9534f</color>
     <color name="colorBootWarning">#f0ad4e</color>
     <color name="colorBootInfo">#5bc0de</color>
+    <color name="colorAdminText">#337ab7</color>
 </resources>

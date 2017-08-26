@@ -18,15 +18,30 @@
         android:layout_weight="40"
         android:orientation="vertical">
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/current_living_status"
-            android:textColor="@color/colorBootPrimary"
-            android:textSize="20sp"
-            android:textStyle="italic"
-            />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/dorm_icon_living_status"
+                android:layout_width="28dp"
+                android:layout_height="wrap_content"
+                android:text="@string/fa_home"
+                android:textColor="@color/colorBootPrimary"
+                android:textSize="24sp"
+                />
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/current_living_status"
+                android:textColor="@color/colorBootPrimary"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                />
+        </LinearLayout>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -134,15 +149,30 @@
         android:orientation="vertical"
         >
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/monthly_dorm_fee_check"
-            android:textColor="@color/colorBootDanger"
-            android:textSize="20sp"
-            android:textStyle="italic"
-            />
+            >
+
+            <TextView
+                android:id="@+id/dorm_icon_fee"
+                android:layout_width="28dp"
+                android:layout_height="wrap_content"
+                android:text="@string/fa_usd"
+                android:textColor="@color/colorBootDanger"
+                android:textSize="24sp"
+                />
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/monthly_dorm_fee_check"
+                android:textColor="@color/colorBootDanger"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                />
+        </LinearLayout>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/dorm_fee_tab"

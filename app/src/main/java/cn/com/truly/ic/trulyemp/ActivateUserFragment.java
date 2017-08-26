@@ -120,6 +120,7 @@ public class ActivateUserFragment extends DialogFragment {
                 .setTitle("解禁 & 重置密码")
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok, null)
+                .setCancelable(false)
                 .create();
 
         return alertDialog;

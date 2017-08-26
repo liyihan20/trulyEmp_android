@@ -78,6 +78,7 @@ public class UpdateInfoFragment extends DialogFragment {
                 .setTitle("更新个人信息")
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok, null)
+                .setCancelable(false)
                 .create();
 
         return alertDialog;

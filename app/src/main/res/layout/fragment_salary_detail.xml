@@ -1,0 +1,55 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="cn.com.truly.ic.trulyemp.SalaryDetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/frg_salary_detail_summary_rv"
+            />
+
+        <Button
+            style="@style/dangerButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:id="@+id/frg_salary_detail_check_more_bt"
+            android:visibility="gone"
+            android:text="@string/check_more_detail"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="@color/bootstrap_gray_lighter"/>
+
+        <ProgressBar
+            android:id="@+id/frg_salary_detail_pb"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"/>
+
+        <!--加一层RelativeLayout 解决 RecyclerView 在 Scrollview 中不能高度自适应问题-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/frg_salary_detail_more_rv"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

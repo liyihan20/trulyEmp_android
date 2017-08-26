@@ -95,7 +95,7 @@ public class DormActivity extends BaseActivity {
     private class GetDormLivingStatusThread extends Thread {
         @Override
         public void run() {
-            SoapService soap = new SoapService();
+            SoapService soap = new SoapService(userModel.getUserId());
             ParamsModel pm = new ParamsModel();
             pm.setArg1(userModel.getCardNumber());
 

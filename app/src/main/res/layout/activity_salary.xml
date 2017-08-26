@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:padding="12dp"
+    tools:context="cn.com.truly.ic.trulyemp.SalaryActivity"
+    >
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/salary_pb"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/salary_icon_info"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:text="@string/fa_home"
+            android:textColor="@color/colorBootSuccess"
+            android:textSize="24sp"
+            />
+
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="100"
+            android:text="@string/salary_info"
+            android:textColor="@color/colorBootSuccess"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            />
+    </LinearLayout>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="4dp"
+        app:contentPadding="12dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/salary_no"
+                    />
+
+                <TextView
+                    android:id="@+id/salary_no_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="40"
+                    android:textColor="@color/colorBootSuccess"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_salary"
+                    />
+
+                <TextView
+                    android:id="@+id/salary_basic_salary_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="60"
+                    android:textColor="@color/colorBootSuccess"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/salary_type"
+                    />
+
+                <TextView
+                    android:id="@+id/salary_type_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="40"
+                    android:textColor="@color/colorBootSuccess"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/last_salary_month"
+                    />
+
+                <TextView
+                    android:id="@+id/salary_last_month_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="60"
+                    android:textColor="@color/colorBootSuccess"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/salary_icon_detail"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:text="@string/fa_usd"
+            android:textColor="@color/colorBootDanger"
+            android:textSize="24sp"
+            />
+
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/salary_detail_check"
+            android:textColor="@color/colorBootDanger"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            />
+    </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/salary_detail_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/salary_detail_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+
+</LinearLayout>
+
+

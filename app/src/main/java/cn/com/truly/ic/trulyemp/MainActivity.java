@@ -9,6 +9,7 @@ import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.beardedhen.androidbootstrap.BootstrapCircleThumbnail;
 
+import java.lang.ref.WeakReference;
 import java.util.Date;
 
 import cn.com.truly.ic.trulyemp.models.ParamsModel;
@@ -33,6 +35,8 @@ public class MainActivity extends BaseActivity {
     private Handler mHandler;
     private long mClickedTime = 0;
 
+    private LinearLayout mAdminLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,48 +44,78 @@ public class MainActivity extends BaseActivity {
 
         initView();
 
-        mHandler = new Handler() {
-
-            @Override
-            public void handleMessage(Message msg) {
-                SimpleResultModel result;
-                switch (msg.what) {
-                    case 1:
-                        if (mPortraitThumbnail != null) {
-                            mPortraitThumbnail.setImageBitmap((Bitmap) msg.obj);
-                        }
-                        break;
-                    case 2:
-                        result = JSON.parseObject(msg.obj.toString(), SimpleResultModel.class);
-                        if (!result.isSuc()) {
-                            Toast.makeText(MainActivity.this, result.getMsg(), Toast.LENGTH_LONG).show();
-                        } else {
-                            Intent dormIntent = new Intent(MainActivity.this, DormActivity.class);
-                            startActivity(dormIntent);
-                        }
-                        break;
-                }
-                super.handleMessage(msg);
-            }
-        };
+        mHandler = new MyHandler(this);
 
         new GetImageThread().start();
+        new GetUserPowerThread().start();
         validateEmailAndPhone();
+    }
+
+    private static class MyHandler extends Handler {
+
+        private final WeakReference<MainActivity> mReference;
+
+        private MyHandler(MainActivity activity) {
+            mReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            MainActivity target = mReference.get();
+            if (target == null) return;
+
+            SimpleResultModel result;
+            switch (msg.what) {
+                case 1:
+                    if (target.mPortraitThumbnail != null) {
+                        target.mPortraitThumbnail.setImageBitmap((Bitmap) msg.obj);
+                    }
+                    break;
+                case 2:
+                    result = JSON.parseObject(msg.obj.toString(), SimpleResultModel.class);
+                    if (!result.isSuc()) {
+                        Toast.makeText(target, result.getMsg(), Toast.LENGTH_LONG).show();
+                    } else {
+                        Intent dormIntent = new Intent(target, DormActivity.class);
+                        target.startActivity(dormIntent);
+                    }
+                    break;
+                case 3:
+                    result = JSON.parseObject(msg.obj.toString(), SimpleResultModel.class);
+                    if (result.isSuc()) {
+                        if (result.getExtra().contains("AdminIndex")) {
+                            target.mAdminLayout.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    break;
+            }
+            super.handleMessage(msg);
+        }
     }
 
     private void initView() {
         mScrollView = (ScrollView) findViewById(R.id.main_scroll_view);
         mPortraitThumbnail = (BootstrapCircleThumbnail) findViewById(R.id.main_portrait_thumbnail);
+        mAdminLayout = (LinearLayout) findViewById(R.id.main_admin_linear_layout);
 
-        RelativeLayout dormLayout=(RelativeLayout)findViewById(R.id.main_dorm_layout);
-        RelativeLayout dinnerLayout=(RelativeLayout)findViewById(R.id.main_dinner_layout);
+        RelativeLayout dormLayout = (RelativeLayout) findViewById(R.id.main_dorm_layout);
+        RelativeLayout dinnerLayout = (RelativeLayout) findViewById(R.id.main_dinner_layout);
+        RelativeLayout adminRelativeLayout = (RelativeLayout) findViewById(R.id.main_admin_relative_layout);
+        RelativeLayout salaryLayout=(RelativeLayout)findViewById(R.id.main_salary_layout);
+
         TextView userNameTextView = (TextView) findViewById(R.id.main_user_name);
         TextView iconDorm = (TextView) findViewById(R.id.icon_main_dorm);
         TextView iconRight1 = (TextView) findViewById(R.id.icon_main_right1);
         TextView iconDinnerCard = (TextView) findViewById(R.id.icon_main_dinner_card);
         TextView iconRight2 = (TextView) findViewById(R.id.icon_main_right2);
+        TextView iconAdmin = (TextView) findViewById(R.id.icon_main_admin);
+        TextView iconRight3 = (TextView) findViewById(R.id.icon_main_right3);
+        TextView iconSalary=(TextView)findViewById(R.id.icon_main_salary);
+        TextView iconRight4=(TextView)findViewById(R.id.icon_main_right4);
 
-        MyUtils.setFont(this, MyUtils.createArrayList(iconDorm, iconRight1, iconDinnerCard, iconRight2));
+        MyUtils.setFont(this, MyUtils.createArrayList(iconDorm, iconRight1, iconDinnerCard,
+                iconRight2, iconAdmin, iconRight3,iconSalary,iconRight4));
+
         userNameTextView.setText(userModel.getUserName());
 
         mPortraitThumbnail.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +136,31 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(DinnerActivity.newIntent(MainActivity.this));
+            }
+        });
+
+        salaryLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //邮箱和手机号码齐全才能进入
+                if(TextUtils.isEmpty(userModel.getPhoneNumber())){
+                    Toast.makeText(MainActivity.this,"进入查询之前请先登记你的手机号码，点击头像即可设置",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(userModel.getEmail())){
+                    Toast.makeText(MainActivity.this,"进入查询之前请先登记你的邮箱(不限信利邮箱，qq或163等都可以)，点击头像即可设置",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Intent intent=SalaryActivity.newIntent(MainActivity.this);
+                startActivity(intent);
+            }
+        });
+
+        adminRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = AdminActivity.newIntent(MainActivity.this);
+                startActivity(intent);
             }
         });
 
@@ -161,7 +220,7 @@ public class MainActivity extends BaseActivity {
     private class UserIsInDormThread extends Thread {
         @Override
         public void run() {
-            SoapService soap = new SoapService();
+            SoapService soap = new SoapService(userModel.getUserId());
             ParamsModel pm = new ParamsModel();
             pm.setArg1(userModel.getSalaryNumber());
 
@@ -169,6 +228,24 @@ public class MainActivity extends BaseActivity {
                 Message msg = mHandler.obtainMessage();
                 msg.what = 2;
                 msg.obj = soap.getSoapStringResult("IsUserInDorm", pm);
+                mHandler.sendMessage(msg);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            super.run();
+        }
+    }
+
+    private class GetUserPowerThread extends Thread {
+        @Override
+        public void run() {
+            SoapService soap = new SoapService(userModel.getUserId());
+            ParamsModel pm = new ParamsModel();
+
+            try {
+                Message msg = mHandler.obtainMessage();
+                msg.what = 3;
+                msg.obj = soap.getSoapStringResult("GetUserPower", pm);
                 mHandler.sendMessage(msg);
             } catch (Exception ex) {
                 ex.printStackTrace();

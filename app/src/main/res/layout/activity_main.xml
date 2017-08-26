@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_scroll_view"
     tools:context="cn.com.truly.ic.trulyemp.MainActivity">
 
     <LinearLayout
@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="132dp"
             android:layout_marginTop="-2dp"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/index_bg"
             >
 
@@ -26,9 +27,9 @@
                 android:id="@+id/main_portrait_thumbnail"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                android:layout_marginTop="8dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_launcher"
                 app:hasBorder="false"/>
@@ -45,58 +46,58 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/main_salary_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:id="@+id/main_dorm_layout"
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/icon_main_dorm"
-                android:layout_width="wrap_content"
+                android:id="@+id/icon_main_salary"
+                android:layout_width="28dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:text="@string/fa_bank"
-                android:textColor="@color/colorBootDanger"
+                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:text="@string/fa_signal"
+                android:textColor="@color/colorBootDanger"
                 android:textSize="24sp"/>
 
             <TextView
-                android:id="@+id/main_dorm_tv"
+                android:id="@+id/main_salary_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/icon_main_dorm"
-                android:layout_toRightOf="@id/icon_main_dorm"
                 android:layout_marginLeft="12dp"
                 android:layout_marginStart="12dp"
-                android:text="@string/dorm_check"
+                android:layout_toEndOf="@id/icon_main_salary"
+                android:layout_toRightOf="@id/icon_main_salary"
+                android:text="@string/check_salary"
                 android:textSize="18sp"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/main_dorm_tv"
-                android:layout_alignLeft="@id/main_dorm_tv"
-                android:layout_alignStart="@id/main_dorm_tv"
-                android:textSize="12sp"
+                android:layout_alignLeft="@id/main_salary_tv"
+                android:layout_alignStart="@id/main_salary_tv"
+                android:layout_below="@id/main_salary_tv"
+                android:text="@string/check_salary_tip"
                 android:textColor="@color/bootstrap_gray_light"
-                android:text="@string/dorm_check_tip"
+                android:textSize="12sp"
                 />
 
             <TextView
-                android:id="@+id/icon_main_right1"
+                android:id="@+id/icon_main_right4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:textSize="18sp"
                 android:text="@string/fa_angle_right"
-                android:textColor="@color/colorBootDanger"/>
+                android:textColor="@color/colorBootDanger"
+                android:textSize="18sp"/>
 
         </RelativeLayout>
 
@@ -106,19 +107,20 @@
             android:background="@color/bootstrap_gray_lighter"/>
 
         <RelativeLayout
+            android:id="@+id/main_dinner_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:id="@+id/main_dinner_layout"
             android:padding="16dp">
 
             <TextView
                 android:id="@+id/icon_main_dinner_card"
-                android:layout_width="wrap_content"
+                android:layout_width="28dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:text="@string/fa_credit_card"
                 android:textColor="@color/colorBootDanger"
@@ -128,23 +130,25 @@
                 android:id="@+id/main_dinner_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/icon_main_dinner_card"
-                android:layout_toRightOf="@id/icon_main_dinner_card"
                 android:layout_marginLeft="12dp"
                 android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/icon_main_dinner_card"
+                android:layout_toRightOf="@id/icon_main_dinner_card"
                 android:text="@string/dinner_card_check"
                 android:textSize="18sp"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/main_dinner_tv"
                 android:layout_alignLeft="@id/main_dinner_tv"
                 android:layout_alignStart="@id/main_dinner_tv"
-                android:textSize="12sp"
-                android:textColor="@color/bootstrap_gray_light"
+                android:layout_below="@id/main_dinner_tv"
                 android:text="@string/dinner_card_check_tip"
+                android:textColor="@color/bootstrap_gray_light"
+                android:textSize="12sp"
                 />
+
             <TextView
                 android:id="@+id/icon_main_right2"
                 android:layout_width="wrap_content"
@@ -152,12 +156,149 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:textSize="18sp"
                 android:text="@string/fa_angle_right"
-                android:textColor="@color/colorBootDanger"/>
+                android:textColor="@color/colorBootDanger"
+                android:textSize="18sp"/>
 
         </RelativeLayout>
 
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/bootstrap_gray_lighter"/>
+
+        <RelativeLayout
+            android:id="@+id/main_dorm_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/icon_main_dorm"
+                android:layout_width="28dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/fa_bank"
+                android:textColor="@color/colorBootDanger"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:id="@+id/main_dorm_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/icon_main_dorm"
+                android:layout_toRightOf="@id/icon_main_dorm"
+                android:text="@string/dorm_check"
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/main_dorm_tv"
+                android:layout_alignStart="@id/main_dorm_tv"
+                android:layout_below="@id/main_dorm_tv"
+                android:text="@string/dorm_check_tip"
+                android:textColor="@color/bootstrap_gray_light"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/icon_main_right1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/fa_angle_right"
+                android:textColor="@color/colorBootDanger"
+                android:textSize="18sp"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/bootstrap_gray_lighter"/>
+
+
+
+        <LinearLayout
+            android:id="@+id/main_admin_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <RelativeLayout
+                android:id="@+id/main_admin_relative_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/icon_main_admin"
+                    android:layout_width="28dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/fa_gear"
+                    android:textColor="@color/colorBootDanger"
+                    android:textSize="24sp"/>
+
+                <TextView
+                    android:id="@+id/main_admin_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_toEndOf="@id/icon_main_admin"
+                    android:layout_toRightOf="@id/icon_main_admin"
+                    android:text="@string/admin_interface"
+                    android:textSize="18sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/main_admin_tv"
+                    android:layout_alignStart="@id/main_admin_tv"
+                    android:layout_below="@id/main_admin_tv"
+                    android:text="@string/admin_interface_tip"
+                    android:textColor="@color/bootstrap_gray_light"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:id="@+id/icon_main_right3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/fa_angle_right"
+                    android:textColor="@color/colorBootDanger"
+                    android:textSize="18sp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/bootstrap_gray_lighter"/>
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -193,53 +193,9 @@ public class MyUtils {
             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, context.getString(android.R.string.cancel), cancelListener);
         }
 
+        alertDialog.setCancelable(false);
         // Showing Alert Message
         alertDialog.show();
-    }
-
-    /**
-     * 嵌套在ScrollView中的话需要手动根据内容设置ListView的高度
-     *
-     * @param listView
-     */
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        // 获取ListView对应的Adapter
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            return;
-        }
-
-        int totalHeight = 0;
-        for (int i = 0, len = listAdapter.getCount(); i < len; i++) {
-            // listAdapter.getCount()返回数据项的数目
-            View listItem = listAdapter.getView(i, null, listView);
-            // 计算子项View 的宽高
-            listItem.measure(0, 0);
-            // 统计所有子项的总高度
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() + 1));
-        // listView.getDividerHeight()获取子项间分隔符占用的高度
-        // params.height最后得到整个ListView完整显示需要的高度
-        listView.setLayoutParams(params);
-    }
-
-    /**
-     * 加载本地图片
-     *
-     * @param url
-     * @return
-     */
-    public static Bitmap getLoacalBitmap(String url) {
-        try {
-            FileInputStream fis = new FileInputStream(url);
-            return BitmapFactory.decodeStream(fis);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     /**
@@ -273,17 +229,6 @@ public class MyUtils {
         return bitmap;
     }
 
-    /**
-     * 网络是否已连接
-     *
-     * @param context
-     * @return
-     */
-    public static boolean isConnected(Context context) {
-        ConnectivityManager conn = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = conn.getActiveNetworkInfo();
-        return (info != null && info.isConnected());
-    }
 
     /**
      * 设置fontawsome字体
@@ -313,6 +258,7 @@ public class MyUtils {
         }
         return list;
     }
+
 
     public static class AES {
 
