@@ -101,7 +101,7 @@ public class MainActivity extends BaseActivity {
         RelativeLayout dormLayout = (RelativeLayout) findViewById(R.id.main_dorm_layout);
         RelativeLayout dinnerLayout = (RelativeLayout) findViewById(R.id.main_dinner_layout);
         RelativeLayout adminRelativeLayout = (RelativeLayout) findViewById(R.id.main_admin_relative_layout);
-        RelativeLayout salaryLayout=(RelativeLayout)findViewById(R.id.main_salary_layout);
+        RelativeLayout salaryLayout = (RelativeLayout) findViewById(R.id.main_salary_layout);
 
         TextView userNameTextView = (TextView) findViewById(R.id.main_user_name);
         TextView iconDorm = (TextView) findViewById(R.id.icon_main_dorm);
@@ -110,11 +110,11 @@ public class MainActivity extends BaseActivity {
         TextView iconRight2 = (TextView) findViewById(R.id.icon_main_right2);
         TextView iconAdmin = (TextView) findViewById(R.id.icon_main_admin);
         TextView iconRight3 = (TextView) findViewById(R.id.icon_main_right3);
-        TextView iconSalary=(TextView)findViewById(R.id.icon_main_salary);
-        TextView iconRight4=(TextView)findViewById(R.id.icon_main_right4);
+        TextView iconSalary = (TextView) findViewById(R.id.icon_main_salary);
+        TextView iconRight4 = (TextView) findViewById(R.id.icon_main_right4);
 
         MyUtils.setFont(this, MyUtils.createArrayList(iconDorm, iconRight1, iconDinnerCard,
-                iconRight2, iconAdmin, iconRight3,iconSalary,iconRight4));
+                iconRight2, iconAdmin, iconRight3, iconSalary, iconRight4));
 
         userNameTextView.setText(userModel.getUserName());
 
@@ -143,15 +143,15 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //邮箱和手机号码齐全才能进入
-                if(TextUtils.isEmpty(userModel.getPhoneNumber())){
-                    Toast.makeText(MainActivity.this,"进入查询之前请先登记你的手机号码，点击头像即可设置",Toast.LENGTH_LONG).show();
+                if (TextUtils.isEmpty(userModel.getPhoneNumber())) {
+                    Toast.makeText(MainActivity.this, "进入查询之前请先登记你的手机号码，点击头像即可设置", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(TextUtils.isEmpty(userModel.getEmail())){
-                    Toast.makeText(MainActivity.this,"进入查询之前请先登记你的邮箱(不限信利邮箱，qq或163等都可以)，点击头像即可设置",Toast.LENGTH_LONG).show();
+                if (TextUtils.isEmpty(userModel.getEmail())) {
+                    Toast.makeText(MainActivity.this, "进入查询之前请先登记你的邮箱(不限信利邮箱，qq或163等都可以)，点击头像即可设置", Toast.LENGTH_LONG).show();
                     return;
                 }
-                Intent intent=SalaryActivity.newIntent(MainActivity.this);
+                Intent intent = SalaryActivity.newIntent(MainActivity.this);
                 startActivity(intent);
             }
         });
