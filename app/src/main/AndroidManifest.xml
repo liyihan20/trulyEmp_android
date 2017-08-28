@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
         android:name=".app.TrulyEmpApp"
@@ -103,7 +104,10 @@
             android:label="用户明细信息"
             android:parentActivityName=".UsersActivity">
         </activity>
-        <activity android:name=".SalaryActivity">
+        <activity android:name=".SalaryActivity"
+            android:label="@string/check_salary"
+            android:parentActivityName=".MainActivity"
+            >
         </activity>
     </application>
 

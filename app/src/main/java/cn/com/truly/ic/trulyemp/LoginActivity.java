@@ -5,19 +5,23 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.text.InputType;
@@ -67,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPassword;
     private CheckBox mRememberMe;
     private Handler mHandler;
-    private String mImei;
+    private String mDeviceID;
 
     SharedPreferences sp;
 
@@ -86,8 +90,17 @@ public class LoginActivity extends AppCompatActivity {
         sp = getSharedPreferences("trulyEmpLoginUser", MODE_PRIVATE);
         if (sp != null) {
             mUserName.setText(sp.getString("userName", ""));
-            mPassword.setText(sp.getString("password", ""));
             mRememberMe.setChecked(sp.getBoolean("rememberMe", false));
+            String password = sp.getString("password", "");
+            if (!TextUtils.isEmpty(password)) {
+                try {
+                    String clearPassword = MyUtils.AES.decrypt(password);
+                    mPassword.setText(clearPassword);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+
         }
 
         mHandler = new Handler() {
@@ -164,12 +177,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) !=
-                PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
-        } else {
-            mImei = getImei();
-        }
+        mDeviceID = getCombinedDeviceId();
+
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) !=
+//                PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
+//        } else {
+//            //授权成功
+//        }
 
     }
 
@@ -277,7 +292,7 @@ public class LoginActivity extends AppCompatActivity {
             ParamsModel pm = new ParamsModel();
             pm.setArg1(mUserName.getText().toString());
             pm.setArg2(mPassword.getText().toString());
-            pm.setArg3(mImei);
+            pm.setArg3(mDeviceID);
             try {
                 Message msg = mHandler.obtainMessage();
                 msg.what = 1;
@@ -312,7 +327,7 @@ public class LoginActivity extends AppCompatActivity {
             SoapService soap = new SoapService();
             ParamsModel pm = new ParamsModel();
             pm.setArg1(mUserName.getText().toString());
-            pm.setArg2(mImei);
+            pm.setArg2(mDeviceID);
             try {
                 Message msg = mHandler.obtainMessage();
                 msg.what = 3;
@@ -371,7 +386,12 @@ public class LoginActivity extends AppCompatActivity {
         editor.putBoolean("rememberMe", mRememberMe.isChecked());
         editor.putString("loginTime", MyUtils.getDateTime(new Date()));
         if (mRememberMe.isChecked()) {
-            editor.putString("password", mPassword.getText().toString());
+            try {
+                String encryptedPassword = MyUtils.AES.encrypt(mPassword.getText().toString());
+                editor.putString("password", encryptedPassword);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         } else {
             editor.putString("password", "");
         }
@@ -437,19 +457,33 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case 1:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mImei = getImei();
-                } else {
-                    mImei = "0";
-                }
-                break;
-            default:
-        }
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        switch (requestCode) {
+//            case 1:
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    //授权成功
+//                } else {
+//                    mImei = "0";
+//
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//                    builder.setTitle("当前应用缺少手机权限,请去设置界面打开");
+//                    builder.setNegativeButton("取消", null);
+//                    builder.setPositiveButton("设置", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+//                            intent.setData(Uri.parse("package:" + getPackageName())); // 根据包名打开对应的设置界面
+//                            startActivity(intent);
+//                        }
+//                    });
+//                    builder.create().show();
+//
+//                }
+//                break;
+//            default:
+//        }
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -467,10 +501,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public String getImei() {
-        return ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId();
-    }
-
     private int getVersionCode() {
         try {
             return getPackageManager().getPackageInfo("cn.com.truly.ic.trulyemp", PackageManager.GET_CONFIGURATIONS).versionCode;
@@ -479,5 +509,15 @@ public class LoginActivity extends AppCompatActivity {
         }
         return -1;
     }
+
+    private String getCombinedDeviceId() {
+        String secureId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        WifiManager wm = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        String macAddress = wm.getConnectionInfo().getMacAddress();
+        if (secureId == null) secureId = "";
+        if (macAddress == null) macAddress = "";
+        return MyUtils.stringToMyMD5(secureId + macAddress);
+    }
+
 }
 
