@@ -11,11 +11,11 @@
         >
 
         <LinearLayout
+            android:id="@+id/dialog_info_password_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
             android:padding="12dp"
-            android:id="@+id/dialog_info_password_layout"
             >
 
             <TextView
@@ -104,7 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_short_phone"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:maxLines="1"
                     />
             </android.support.design.widget.TextInputLayout>
@@ -133,7 +133,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_phone"
-                    android:inputType="text"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/dialog_info_bank_card_icon"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/dialog_info_email_icon"
+                android:layout_alignStart="@id/dialog_info_email_icon"
+                android:layout_below="@id/dialog_info_phone_layout"
+                android:text="@string/fa_phone"
+                android:textColor="@color/colorAccent"
+                />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/dialog_info_bank_card_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/dialog_info_bank_card_icon"
+                android:layout_toEndOf="@id/dialog_info_bank_card_icon"
+                android:layout_toRightOf="@id/dialog_info_bank_card_icon">
+
+                <EditText
+                    android:id="@+id/dialog_info_bank_card_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_bank_card"
+                    android:inputType="number"
+                    android:maxLength="6"
                     android:maxLines="1"
                     />
             </android.support.design.widget.TextInputLayout>
@@ -144,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/dialog_info_email_icon"
                 android:layout_alignStart="@id/dialog_info_email_icon"
-                android:layout_below="@id/dialog_info_phone_layout"
+                android:layout_below="@id/dialog_info_bank_card_layout"
                 android:text="@string/fa_lock"
                 android:textColor="@color/colorAccent"
                 />
@@ -153,10 +183,10 @@
                 android:id="@+id/dialog_info_new_password_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true"
                 android:layout_alignTop="@id/dialog_info_new_password_icon"
                 android:layout_toEndOf="@id/dialog_info_new_password_icon"
-                android:layout_toRightOf="@id/dialog_info_new_password_icon">
+                android:layout_toRightOf="@id/dialog_info_new_password_icon"
+                app:passwordToggleEnabled="true">
 
                 <EditText
                     android:id="@+id/dialog_info_new_password_edit_text"
@@ -183,10 +213,10 @@
                 android:id="@+id/dialog_info_confirm_password_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true"
                 android:layout_alignTop="@id/dialog_info_confirm_password_icon"
                 android:layout_toEndOf="@id/dialog_info_confirm_password_icon"
-                android:layout_toRightOf="@id/dialog_info_confirm_password_icon">
+                android:layout_toRightOf="@id/dialog_info_confirm_password_icon"
+                app:passwordToggleEnabled="true">
 
                 <EditText
                     android:id="@+id/dialog_info_confirm_password_edit_text"

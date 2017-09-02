@@ -38,22 +38,24 @@ public class UpdateInfoFragment extends DialogFragment {
     private static final String ARG_PHONE = "arg_phone";
     private static final String ARG_SHORT_PHONE = "arg_short_phone";
     private static final String ARG_EMAIL = "arg_email";
+    private static final String ARG_BANK_CARD="arg_bank_card";
 
     private int mUserId;
-    private String mMd5Password, mPhone, mShortPhone, mEmail;
+    private String mMd5Password, mPhone, mShortPhone, mEmail,mBankCard;
     private LinearLayout mPasswordLinearLayout;
     private RelativeLayout mDetailRelativeLayout;
-    private EditText mPaswordEt, mEmailEt, mPhoneEt, mShortPhoneEt, mNewPasswordEt, mConfirmPasswordEt;
+    private EditText mPaswordEt, mEmailEt, mPhoneEt, mShortPhoneEt, mNewPasswordEt, mConfirmPasswordEt,mBankCardEt;
 
     private Handler mHandler;
 
-    public static UpdateInfoFragment newInstance(int userId, String md5Password, String phone, String shortPhone, String email) {
+    public static UpdateInfoFragment newInstance(int userId, String md5Password, String phone, String shortPhone, String email,String bankCardNo) {
         Bundle args = new Bundle();
         args.putInt(ARG_USER_ID, userId);
         args.putString(ARG_MD5_PASSWORD, md5Password);
         args.putString(ARG_PHONE, phone);
         args.putString(ARG_SHORT_PHONE, shortPhone);
         args.putString(ARG_EMAIL, email);
+        args.putString(ARG_BANK_CARD,bankCardNo);
 
         UpdateInfoFragment fragment = new UpdateInfoFragment();
         fragment.setArguments(args);
@@ -68,6 +70,7 @@ public class UpdateInfoFragment extends DialogFragment {
         mPhone = getArguments().getString(ARG_PHONE);
         mShortPhone = getArguments().getString(ARG_SHORT_PHONE);
         mEmail = getArguments().getString(ARG_EMAIL);
+        mBankCard=getArguments().getString(ARG_BANK_CARD);
 
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_update_info, null);
 
@@ -93,6 +96,7 @@ public class UpdateInfoFragment extends DialogFragment {
         mShortPhoneEt = (EditText) v.findViewById(R.id.dialog_info_short_phone_edit_text);
         mNewPasswordEt = (EditText) v.findViewById(R.id.dialog_info_new_password_edit_text);
         mConfirmPasswordEt = (EditText) v.findViewById(R.id.dialog_info_confirm_password_edit_text);
+        mBankCardEt=(EditText)v.findViewById(R.id.dialog_info_bank_card_text);
 
         TextView iconPasswordTv = (TextView) v.findViewById(R.id.dialog_info_password_icon);
         TextView iconNewPasswordTv = (TextView) v.findViewById(R.id.dialog_info_new_password_icon);
@@ -100,9 +104,10 @@ public class UpdateInfoFragment extends DialogFragment {
         TextView iconEmailTv = (TextView) v.findViewById(R.id.dialog_info_email_icon);
         TextView iconPhoneTv = (TextView) v.findViewById(R.id.dialog_info_phone_icon);
         TextView iconShortPhoneTv = (TextView) v.findViewById(R.id.dialog_info_short_phone_icon);
+        TextView iconBankCardTv=(TextView)v.findViewById(R.id.dialog_info_bank_card_icon);
 
         MyUtils.setFont(getActivity(), MyUtils.createArrayList(iconPasswordTv, iconNewPasswordTv,
-                iconConfirmPasswordTv, iconEmailTv, iconPhoneTv, iconShortPhoneTv));
+                iconConfirmPasswordTv, iconEmailTv, iconPhoneTv, iconShortPhoneTv,iconBankCardTv));
 
     }
 
@@ -127,11 +132,13 @@ public class UpdateInfoFragment extends DialogFragment {
                         mEmailEt.setText(mEmail);
                         mPhoneEt.setText(mPhone);
                         mShortPhoneEt.setText(mShortPhone);
+                        mBankCardEt.setText(mBankCard);
                     }
                 } else {
                     //设置个人信息
                     String phoneRegex = "^\\d{11}$";
                     String emailRegex = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
+                    String bankCardRegex="^\\d{6}$";
 
                     if (!TextUtils.isEmpty(mEmailEt.getText().toString()) &&
                             !Pattern.matches(emailRegex, mEmailEt.getText().toString())) {
@@ -144,7 +151,11 @@ public class UpdateInfoFragment extends DialogFragment {
                     } else if (!mNewPasswordEt.getText().toString().equals(mConfirmPasswordEt.getText().toString())) {
                         mConfirmPasswordEt.requestFocus();
                         mConfirmPasswordEt.setError("确认密码与新密码不一致");
-                    } else {
+                    } else if(!TextUtils.isEmpty(mBankCardEt.getText().toString()) &&
+                            !Pattern.matches(bankCardRegex,mBankCardEt.getText().toString())) {
+                        mBankCardEt.requestFocus();
+                        mBankCardEt.setError("银行卡号后6位不合法");
+                    }else{
                         new UpdateInfoThread().start();
                     }
 
@@ -174,7 +185,9 @@ public class UpdateInfoFragment extends DialogFragment {
                             if (!TextUtils.isEmpty(mNewPasswordEt.getText().toString())) {
                                 userModel.setMd5Password(MyUtils.stringToMyMD5(mNewPasswordEt.getText().toString()));
                             }
-
+                            if(!TextUtils.isEmpty(mBankCardEt.getText().toString())){
+                                userModel.setBankCardNumber(mBankCardEt.getText().toString());
+                            }
                             dialog.dismiss();
                         }
                         Toast.makeText(getActivity(), result.getMsg(), Toast.LENGTH_LONG).show();
@@ -195,6 +208,7 @@ public class UpdateInfoFragment extends DialogFragment {
             params.setArg2(mPhoneEt.getText().toString());
             params.setArg3(mShortPhoneEt.getText().toString());
             params.setArg4(mNewPasswordEt.getText().toString());
+            params.setArg5(mBankCardEt.getText().toString());
 
             try {
                 Message msg = mHandler.obtainMessage();

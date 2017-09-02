@@ -109,6 +109,7 @@
             android:parentActivityName=".MainActivity"
             >
         </activity>
+        <activity android:name=".WebViewActivity"/>
     </application>
 
 </manifest>

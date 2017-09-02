@@ -220,6 +220,33 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/icon_question4"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fa_question_circle"
+                        android:textColor="@color/colorBootSuccess"
+                        />
+
+                    <TextView
+                        android:id="@+id/login_push_notice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/push_tip"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/bootstrap_gray_lighter"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     >
 

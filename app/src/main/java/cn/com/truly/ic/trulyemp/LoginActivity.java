@@ -1,10 +1,8 @@
 package cn.com.truly.ic.trulyemp;
 
-import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,10 +19,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -41,10 +37,8 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -147,6 +141,8 @@ public class LoginActivity extends AppCompatActivity {
                             MyUtils.showAlertDialog(LoginActivity.this,
                                     "版本升级"
                                     , "检测到有新的版本" + (uModel.isForceUpdate() ? "(重大更新，必须升级)" : "") + ",是否前往下载安装?"
+                                    +"\n升级内容:\n"
+                                    +uModel.getContent()
                                     , null,
                                     new DialogInterface.OnClickListener() {
                                         @Override
@@ -177,14 +173,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
-        mDeviceID = getCombinedDeviceId();
-
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) !=
-//                PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
-//        } else {
-//            //授权成功
-//        }
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_PHONE_STATE}, 1);
+        } else {
+            mDeviceID=getImei();
+        }
 
     }
 
@@ -200,15 +194,18 @@ public class LoginActivity extends AppCompatActivity {
         TextView forgetLink = (TextView) findViewById(R.id.forget_link);
         TextView docLink = (TextView) findViewById(R.id.doc_link);
         TextView questionLink = (TextView) findViewById(R.id.question_link);
+        TextView pushNoticeLink=(TextView)findViewById(R.id.login_push_notice);
         TextView faQuestion = (TextView) findViewById(R.id.icon_question);
         TextView faQuestion2 = (TextView) findViewById(R.id.icon_question2);
         TextView faQuestion3 = (TextView) findViewById(R.id.icon_question3);
+        TextView faQuestion4 = (TextView) findViewById(R.id.icon_question4);
         TextView faTip = (TextView) findViewById(R.id.icon_tip);
         TextView faUser = (TextView) findViewById(R.id.icon_user);
         TextView faLock = (TextView) findViewById(R.id.icon_lock);
 
         //设置font字体
-        List<TextView> fontViews = MyUtils.createArrayList(faQuestion, faQuestion2, faTip, faUser, faLock, faQuestion3);
+        List<TextView> fontViews = MyUtils.createArrayList(faQuestion, faQuestion2,
+                faTip, faUser, faLock, faQuestion3,faQuestion4);
         MyUtils.setFont(this, fontViews);
 
         //密码的输入法回车事件
@@ -276,6 +273,15 @@ public class LoginActivity extends AppCompatActivity {
                 i.putExtra(Intent.EXTRA_SUBJECT, "信利员工信息查询系统(android)");
                 i.putExtra(Intent.EXTRA_TEXT, "系统管理员,你好：");
                 startActivity(Intent.createChooser(i, "请选择发送邮件的程序"));
+            }
+        });
+
+        //推送有问题点击事件
+        pushNoticeLink.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(WebViewActivity.newIntent(LoginActivity.this,"接收推送-手机设置","http://59.37.42.23/Emp/AndroidApp/PushNotice"));
             }
         });
 
@@ -457,33 +463,19 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        switch (requestCode) {
-//            case 1:
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    //授权成功
-//                } else {
-//                    mImei = "0";
-//
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//                    builder.setTitle("当前应用缺少手机权限,请去设置界面打开");
-//                    builder.setNegativeButton("取消", null);
-//                    builder.setPositiveButton("设置", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-//                            intent.setData(Uri.parse("package:" + getPackageName())); // 根据包名打开对应的设置界面
-//                            startActivity(intent);
-//                        }
-//                    });
-//                    builder.create().show();
-//
-//                }
-//                break;
-//            default:
-//        }
-//    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mDeviceID=getImei();
+                } else {
+                    mDeviceID=getCombinedDeviceId();
+                }
+                break;
+            default:
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -508,6 +500,11 @@ public class LoginActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
         return -1;
+    }
+
+    private String getImei(){
+        TelephonyManager tm = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
+        return tm.getDeviceId();
     }
 
     private String getCombinedDeviceId() {

@@ -8,6 +8,7 @@ public class UpdateModel {
     private int versionCode;
     private String apkUrl;
     private boolean forceUpdate;
+    private String content;
 
     public int getVersionCode() {
         return versionCode;
@@ -31,5 +32,13 @@ public class UpdateModel {
 
     public void setForceUpdate(boolean forceUpdate) {
         this.forceUpdate = forceUpdate;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

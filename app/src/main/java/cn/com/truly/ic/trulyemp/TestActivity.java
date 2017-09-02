@@ -1,15 +1,12 @@
 package cn.com.truly.ic.trulyemp;
 
-import cn.com.truly.ic.trulyemp.models.SimpleResultModel;
-import cn.jpush.android.api.JPushInterface;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import cn.jpush.android.api.JPushInterface;
 
 public class TestActivity extends Activity {
 

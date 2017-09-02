@@ -17,6 +17,7 @@ public class UserModel implements Serializable {
     private String phoneNumber;
     private String shortPhoneNumber;
     private String md5Password;
+    private String bankCardNumber;
 
     public int getUserId() {
         return userId;
@@ -98,5 +99,11 @@ public class UserModel implements Serializable {
         this.md5Password = md5Password;
     }
 
+    public String getBankCardNumber() {
+        return bankCardNumber;
+    }
 
+    public void setBankCardNumber(String bankCardNumber) {
+        this.bankCardNumber = bankCardNumber;
+    }
 }

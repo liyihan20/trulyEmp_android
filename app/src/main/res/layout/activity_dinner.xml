@@ -196,6 +196,7 @@
             >
 
             <LinearLayout
+                android:id="@+id/dinner_supermarket_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -210,195 +211,214 @@
 
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="@string/supermarket_binding"
                     android:textColor="@color/colorBootDanger"
                     android:textSize="20sp"
                     android:textStyle="italic"
                     />
-            </LinearLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
-
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:text="@string/is_open"
-                    />
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/dinner_consume_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:textOff="@string/close"
-                    android:textOn="@string/open"/>
-
-                <TextView
-                    android:id="@+id/dinner_icon_info1"
-                    android:layout_width="16dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@id/dinner_consume_switch"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/fa_info_circle"
+                    android:layout_width="24dp"
                     android:textColor="@color/colorBootDanger"
-                    android:textSize="12sp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/dinner_consume_switch"
-                    android:layout_toEndOf="@id/dinner_icon_info1"
-                    android:layout_toRightOf="@id/dinner_icon_info1"
-                    android:text="@string/supermarket_open_tip"
-                    android:textColor="@color/colorBootDanger"
-                    android:textSize="12sp"
+                    android:id="@+id/dinner_icon_fold"
+                    android:textSize="20sp"
+                    android:text="@string/fa_chevron_circle_down"
                     />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/pay_password"
-                    />
-
-                <EditText
-                    android:id="@+id/dinner_pay_password"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="80"
-                    android:hint="@string/pay_password_prompt"
-                    android:inputType="numberPassword"
-                    android:maxLength="6"
-                    android:maxLines="1"
-                    />
-
-                <TextView
-                    android:id="@+id/dinner_icon_eye"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="20"
-                    android:clickable="true"
-                    android:gravity="end"
-                    android:text="@string/fa_eye_slash"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18sp"
-                    />
-
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/dinner_supermarket_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
+                android:orientation="vertical"
+                android:visibility="gone"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/consume_limit"
-                    />
+                    android:layout_marginTop="8dp">
 
-                <SeekBar
-                    android:id="@+id/dinner_limit_seek_bar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="80"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/is_open"
+                        />
 
-                <TextView
-                    android:id="@+id/dinner_limit_value_tv"
-                    android:layout_width="0dp"
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/dinner_consume_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:textOff="@string/close"
+                        android:textOn="@string/open"/>
+
+                    <TextView
+                        android:id="@+id/dinner_icon_info1"
+                        android:layout_width="16dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/dinner_consume_switch"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/fa_info_circle"
+                        android:textColor="@color/colorBootDanger"
+                        android:textSize="12sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dinner_consume_switch"
+                        android:layout_toEndOf="@id/dinner_icon_info1"
+                        android:layout_toRightOf="@id/dinner_icon_info1"
+                        android:text="@string/supermarket_open_tip"
+                        android:textColor="@color/colorBootDanger"
+                        android:textSize="12sp"
+                        />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="20"
-                    android:gravity="end"
-                    android:text="@string/zero_yuan"
-                    android:textColor="@color/colorAccent"
-                    />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/pay_password"
+                        />
+
+                    <EditText
+                        android:id="@+id/dinner_pay_password"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="80"
+                        android:hint="@string/pay_password_prompt"
+                        android:inputType="numberPassword"
+                        android:maxLength="6"
+                        android:maxLines="1"
+                        />
+
+                    <TextView
+                        android:id="@+id/dinner_icon_eye"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="20"
+                        android:clickable="true"
+                        android:gravity="end"
+                        android:text="@string/fa_eye_slash"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/consume_limit"
+                        />
+
+                    <SeekBar
+                        android:id="@+id/dinner_limit_seek_bar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="80"/>
+
+                    <TextView
+                        android:id="@+id/dinner_limit_value_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="20"
+                        android:gravity="end"
+                        android:text="@string/zero_yuan"
+                        android:textColor="@color/colorAccent"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/dinner_icon_info2"
+                        android:layout_width="16dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fa_info_circle"
+                        android:textColor="@color/colorBootDanger"
+                        android:textSize="12sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/consume_limit_tip"
+                        android:textColor="@color/colorBootDanger"
+                        android:textSize="12sp"
+                        />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/dinner_save_binding_bt"
+                    style="@style/dangerButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/save_configuration"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/dinner_icon_info3"
+                        android:layout_width="16dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fa_info_circle"
+                        android:textColor="@color/colorBootDanger"
+                        android:textSize="12sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dinner_binding_tip"
+                        android:textColor="@color/colorBootDanger"
+                        android:textSize="12sp"
+                        />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/dinner_icon_info2"
-                    android:layout_width="16dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fa_info_circle"
-                    android:textColor="@color/colorBootDanger"
-                    android:textSize="12sp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/consume_limit_tip"
-                    android:textColor="@color/colorBootDanger"
-                    android:textSize="12sp"
-                    />
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/dinner_save_binding_bt"
-                style="@style/dangerButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/save_configuration"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/dinner_icon_info3"
-                    android:layout_width="16dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fa_info_circle"
-                    android:textColor="@color/colorBootDanger"
-                    android:textSize="12sp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dinner_binding_tip"
-                    android:textColor="@color/colorBootDanger"
-                    android:textSize="12sp"
-                    />
-
-            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -439,60 +459,65 @@
                 android:id="@+id/dinner_consume_record_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
                 >
+
                 <TextView
                     android:id="@+id/dinner_icon_minus"
                     android:layout_width="24dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/fa_minus_square"
-                    android:textColor="@color/colorBootSuccess"
-                    android:textSize="18sp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
+                    android:text="@string/fa_minus_square"
+                    android:textColor="@color/colorBootSuccess"
+                    android:textSize="18sp"
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/dinner_icon_minus"
-                    android:layout_toEndOf="@id/dinner_icon_minus"
                     android:layout_alignBaseline="@id/dinner_icon_minus"
+                    android:layout_toEndOf="@id/dinner_icon_minus"
+                    android:layout_toRightOf="@id/dinner_icon_minus"
                     android:text="@string/consume_record_check"
                     />
+
                 <TextView
                     android:id="@+id/dinner_icon_info4"
                     android:layout_width="16dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/dinner_icon_minus"
                     android:text="@string/fa_info_circle"
                     android:textColor="@color/colorBootDanger"
                     android:textSize="12sp"
-                    android:layout_below="@id/dinner_icon_minus"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/dinner_icon_info4"
+                    android:layout_toEndOf="@id/dinner_icon_info4"
+                    android:layout_toRightOf="@id/dinner_icon_info4"
                     android:text="@string/consume_record_check_tip"
                     android:textColor="@color/colorBootDanger"
                     android:textSize="12sp"
-                    android:layout_toRightOf="@id/dinner_icon_info4"
-                    android:layout_toEndOf="@id/dinner_icon_info4"
-                    android:layout_alignBaseline="@id/dinner_icon_info4"
                     />
+
                 <TextView
                     android:id="@+id/dinner_icon_right1"
                     android:layout_width="20dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:text="@string/fa_chevron_right"
                     android:textColor="@color/colorBootSuccess"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
                     />
             </RelativeLayout>
 
@@ -505,60 +530,65 @@
                 android:id="@+id/dinner_charge_record_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
                 >
+
                 <TextView
                     android:id="@+id/dinner_icon_plus"
                     android:layout_width="24dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/fa_plus_square"
-                    android:textColor="@color/colorBootSuccess"
-                    android:textSize="18sp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
+                    android:text="@string/fa_plus_square"
+                    android:textColor="@color/colorBootSuccess"
+                    android:textSize="18sp"
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/dinner_icon_plus"
-                    android:layout_toEndOf="@id/dinner_icon_plus"
                     android:layout_alignBaseline="@id/dinner_icon_plus"
+                    android:layout_toEndOf="@id/dinner_icon_plus"
+                    android:layout_toRightOf="@id/dinner_icon_plus"
                     android:text="@string/recharge_record_check"
                     />
+
                 <TextView
                     android:id="@+id/dinner_icon_info5"
                     android:layout_width="16dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/dinner_icon_plus"
                     android:text="@string/fa_info_circle"
                     android:textColor="@color/colorBootDanger"
                     android:textSize="12sp"
-                    android:layout_below="@id/dinner_icon_plus"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/dinner_icon_info5"
+                    android:layout_toEndOf="@id/dinner_icon_info5"
+                    android:layout_toRightOf="@id/dinner_icon_info5"
                     android:text="@string/recharge_record_check_tip"
                     android:textColor="@color/colorBootDanger"
                     android:textSize="12sp"
-                    android:layout_toRightOf="@id/dinner_icon_info5"
-                    android:layout_toEndOf="@id/dinner_icon_info5"
-                    android:layout_alignBaseline="@id/dinner_icon_info5"
                     />
+
                 <TextView
                     android:id="@+id/dinner_icon_right2"
                     android:layout_width="20dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:text="@string/fa_chevron_right"
                     android:textColor="@color/colorBootSuccess"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
                     />
             </RelativeLayout>
 

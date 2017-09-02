@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -122,6 +123,9 @@ public class DinnerActivity extends BaseActivity {
         RelativeLayout consumeRecordLt = (RelativeLayout) findViewById(R.id.dinner_consume_record_layout);
         RelativeLayout chargeRecordLt = (RelativeLayout) findViewById(R.id.dinner_charge_record_layout);
 
+        LinearLayout supermarketTitleLl=(LinearLayout)findViewById(R.id.dinner_supermarket_title);
+        final LinearLayout supermarketContentLl=(LinearLayout)findViewById(R.id.dinner_supermarket_content);
+
         mIconEye = (TextView) findViewById(R.id.dinner_icon_eye);
         TextView iconInfo1 = (TextView) findViewById(R.id.dinner_icon_info1);
         TextView iconInfo2 = (TextView) findViewById(R.id.dinner_icon_info2);
@@ -135,12 +139,13 @@ public class DinnerActivity extends BaseActivity {
         TextView iconRight2 = (TextView) findViewById(R.id.dinner_icon_right2);
         TextView iconInfo4 = (TextView) findViewById(R.id.dinner_icon_info4);
         TextView iconInfo5 = (TextView) findViewById(R.id.dinner_icon_info5);
+        final TextView iconFold=(TextView)findViewById(R.id.dinner_icon_fold);
 
         mSaveButton = (Button) findViewById(R.id.dinner_save_binding_bt);
 
         MyUtils.setFont(this, MyUtils.createArrayList(mIconEye, iconInfo1, iconInfo2,
                 iconInfo3, iconList, iconBinding, iconSearch, iconMinus, iconRight1,
-                iconPlus, iconRight2, iconInfo4, iconInfo5));
+                iconPlus, iconRight2, iconInfo4, iconInfo5,iconFold));
 
         mIconEye.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,6 +246,19 @@ public class DinnerActivity extends BaseActivity {
                 Intent intent = SearchByDateActivity.newIntent(DinnerActivity.this,
                         getString(R.string.recharge_record_check), SearchByDateFragment.Which.RECHARGE_RECORD);
                 startActivity(intent);
+            }
+        });
+
+        supermarketTitleLl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(iconFold.getText()==getString(R.string.fa_chevron_circle_down)){
+                    iconFold.setText(getString(R.string.fa_chevron_circle_up));
+                    supermarketContentLl.setVisibility(View.VISIBLE);
+                }else{
+                    iconFold.setText(getString(R.string.fa_chevron_circle_down));
+                    supermarketContentLl.setVisibility(View.GONE);
+                }
             }
         });
 

@@ -2,6 +2,7 @@ package cn.com.truly.ic.trulyemp;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -88,6 +89,23 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                     break;
+                case 4:
+                    result = JSON.parseObject(msg.obj.toString(), SimpleResultModel.class);
+                    if(!result.isSuc()){
+                        Toast.makeText(target,result.getMsg(),Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(target.userModel.getBankCardNumber())){
+                        Toast.makeText(target,result.getMsg(),Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if(!target.userModel.getBankCardNumber().equals(result.getExtra())){
+                        Toast.makeText(target,"检测到你的工资银行卡号已变动，请点击头像更新你的银行卡号后再查询",Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    Intent intent = SalaryActivity.newIntent(target);
+                    target.startActivity(intent);
+                    break;
             }
             super.handleMessage(msg);
         }
@@ -151,8 +169,8 @@ public class MainActivity extends BaseActivity {
                     Toast.makeText(MainActivity.this, "进入查询之前请先登记你的邮箱(不限信利邮箱，qq或163等都可以)，点击头像即可设置", Toast.LENGTH_LONG).show();
                     return;
                 }
-                Intent intent = SalaryActivity.newIntent(MainActivity.this);
-                startActivity(intent);
+                //获取工资银行卡号后6位
+                new GetSalaryBankCardThread().start();
             }
         });
 
@@ -172,7 +190,8 @@ public class MainActivity extends BaseActivity {
                 userModel.getMd5Password(),
                 userModel.getPhoneNumber(),
                 userModel.getShortPhoneNumber(),
-                userModel.getEmail()
+                userModel.getEmail(),
+                userModel.getBankCardNumber()
         );
         fragment.show(getSupportFragmentManager(), UPDATE_INFO_DIALOG);
     }
@@ -246,6 +265,25 @@ public class MainActivity extends BaseActivity {
                 Message msg = mHandler.obtainMessage();
                 msg.what = 3;
                 msg.obj = soap.getSoapStringResult("GetUserPower", pm);
+                mHandler.sendMessage(msg);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            super.run();
+        }
+    }
+
+    private class GetSalaryBankCardThread extends Thread {
+        @Override
+        public void run() {
+            SoapService soap = new SoapService(userModel.getUserId());
+            ParamsModel pm = new ParamsModel();
+            pm.setArg1(userModel.getSalaryNumber());
+
+            try {
+                Message msg = mHandler.obtainMessage();
+                msg.what = 4;
+                msg.obj = soap.getSoapStringResult("GetSalaryBankCard", pm);
                 mHandler.sendMessage(msg);
             } catch (Exception ex) {
                 ex.printStackTrace();

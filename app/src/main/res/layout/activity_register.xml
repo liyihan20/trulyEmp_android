@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_username"
                     android:inputType="number"
-                    android:singleLine="true"
+                    android:maxLines="1"
                     />
             </LinearLayout>
 
@@ -85,7 +85,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_name"
-                    android:singleLine="true"
+                    android:inputType="text"
+                    android:maxLines="1"
                     />
 
 
@@ -105,7 +106,7 @@
                     android:id="@+id/reg_id_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:hint="@string/prompt_id_number"/>
 
             </LinearLayout>
@@ -166,7 +167,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
-                    android:singleLine="true"
+                    android:inputType="text"
+                    android:maxLines="1"
                     android:hint="@string/prompt_email_code"/>
 
                 <Button
@@ -192,6 +194,7 @@
                 <EditText
                     android:id="@+id/reg_phone"
                     android:hint="@string/prompt_phone_last4"
+                    android:inputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
